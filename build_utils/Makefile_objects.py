@@ -1,4 +1,4 @@
-group_names = ['FORM_RHO','KSPACE','INITMPI','UTIL','DASSEMBLERS','INTERACTIONS','ORDERN','UTIL_SPARSE','ALLOCATIONS','ASSEMBLERS',
+group_names = ['FORM_RHO','KSPACE','UTIL','DASSEMBLERS','INTERACTIONS','UTIL_SPARSE','ALLOCATIONS','ASSEMBLERS',
         'GRID','INITIALIZERS','INTERPOLATERS','LOOPS','MAIN','MD','MODULES','NEIGHBORS','PRESSURE',
         'READFILES','ROTATIONS','THERMOINT','SOCKETS','UMBRELLA','XC','CG','DOS','NEB','TDSE','TRANS','BIAS','NAC','QMMM','DFTD3']
 
@@ -22,10 +22,6 @@ GROUPS = {
 'MPI-k' : ['kspace_MPI-k','diag_k-MPI'],
 }, #END KSPACE
 
-'INITMPI' : {
-'MPI-k' : ['mpi_declarations','init_MPI'],
-}, #END INITMPI
-
 'UTIL' : {
 '' : ['anderson','anderson2','fixfrags','fixfrags2','hampiece','push_atoms','writeout_ac','writeout_cd','writeout_charges','writeout_dipole','writeout_comph',
         'writeout_neighbors','writeout_xv','writeout_neighborsPP','hamtrans','mixer','den2mesh','ew2mesh','ew2mesh_gamma','postscf','den2mesh_import',
@@ -37,34 +33,24 @@ GROUPS = {
 'MPI-k' : ['diag_k-MPI_slave','bcast_k-MPI','bcast_k-MPI_slave'],
 }, #END UTIL
 
-'DASSEMBLERS' : {
-'' : ['Dassemble_2c','Dassemble_3c','Dassemble_ca_2c','Dassemble_ca_3c','Dassemble_eh_2c','Dassemble_hxc_2c','Dassemble_hxc_3c',
-        'Dassemble_lr','Dassemble_snxc_on','Dassemble_olsxc_on','Dassemble_olsxc_2c','Dassemble_olsxc_3c','Dassemble_snxc_2c','Dassemble_snxc_3c',
-        'Dassemble_2c_PP','Dassemble_3c_PP','Dassemble_ca_olsxc_on','Dassemble_ca_snxc_on','Dassemble_ca_snxc_3c','Dassemble_ca_olsxc_3c',
-        'Dassemble_ca_snxc_2c','Dassemble_ca_olsxc_2c','Dassemble_ca_2c_dip','Dassemble_ca_3c_dip',
-        'Dassemble_lr_dip','getforces_mcweda','getforces_eh','getforces_hxc','getforces_KS','getforces_classic','getforces_classic_RGL',
-        'getforces_classic_vdw','getforces','getforces_classic_tersoff','getforces_zw','Dassemble_zw_2c_ct','Dassemble_zw_3c_ct','Dassemble_zw_2c_na',
-        'Dassemble_zw_3c_na','Dassemble_zw_on_na'],
-'OPENMP' : ['Dassemble_lr_OMP'],
-'QMMM'   : ['Dassemble_qmmm','Dassemble_qmmm_dip']
-}, #END DASSEMBLERS
+
 
 'INTERACTIONS' : {
-'':  ['cl_value', 'Dtrescentros', 'doscentros', 'doscentrosPP', 'get_vdw', 'getHarmonic', 'trescentros', 'unocentros', 'smoother', 'doscentrosS', 
-        'trescentrosS', 'DtrescentrosS', 'dosgaussians', 'gelements_VXC', 'Dgelements_VXC', 'gelementsG_VXC', 'DgelementsG_VXC', 'gelementsG_VNA', 
+'':  ['cl_value', 'Dtrescentros', 'doscentros', 'doscentrosPP', 'doscentrosDipY', 'doscentrosDipX', 'get_ewald', 'get_vdw', 'getHarmonic', 'trescentros', 'unocentros', 'smoother', 
+        'doscentrosS', 'trescentrosS', 'DtrescentrosS', 'dosgaussians', 'gelements_VXC', 'Dgelements_VXC', 'gelementsG_VXC', 'DgelementsG_VXC', 'gelementsG_VNA', 
         'DgelementsG_VNA', 'gelementsGS_VXC', 'DgelementsGS_VXC', 'gelementsG_VNA_SH', 'DgelementsG_VNA_SH', 'gelementsG_VNA_SH_RNA', 'DgelementsG_VNA_SH_RNA', 
         'trescentrosGHXC_VXC', 'DtrescentrosGHXC_VXC', 'trescentrosG_VNA', 'DtrescentrosG_VNA', 'trescentrosG_VXC', 'DtrescentrosG_VXC', 'trescentrosGS_VXC', 
         'DtrescentrosGS_VXC', 'trescentrosG_VNA_SH', 'DtrescentrosG_VNA_SH', 'doscentrosGS_overlap', 'gelementsGS_overlap', 'DgelementsGS_overlap', 'doscentrosG_overlap', 
         'gelementsG_overlap', 'DgelementsG_overlap', 'internalLambda', 'tester2c'],
-'SCALAPACK' : ['doscentrosDipY', 'doscentrosDipX', 'get_ewald'],
-'ORDERN' : ['get_ewald_OMP'],
+#'SCALAPACK' : ['doscentrosDipY', 'doscentrosDipX', 'get_ewald'],
+'OPENMP' : ['get_ewald_OMP'],
 }, #END INTERACTIONS
 
-'ORDERN' : {
-'ORDERN' : ['ordern','allocate_ordern','assemble_2c_ordern_final','assemble_2c_ordern_init','assemble_3c_ordern_final','assemble_ca_2c_ordern_final',
-        'assemble_ca_3c_ordern_final','assemble_eh_2c_ordern_final','Dassemble_2c_ordern_final','Dassemble_3c_ordern_final','Dassemble_ca_2c_ordern_final',
-        'Dassemble_ca_3c_ordern_final'],
-}, #END ORDERN
+#'ORDERN' : {
+#'ORDERN' : ['assemble_2c_ordern_final','assemble_2c_ordern_init','assemble_3c_ordern_final','assemble_ca_2c_ordern_final',
+#        'assemble_ca_3c_ordern_final','assemble_eh_2c_ordern_final','Dassemble_2c_ordern_final','Dassemble_3c_ordern_final','Dassemble_ca_2c_ordern_final',
+#        'Dassemble_ca_3c_ordern_final'],
+#}, #END ORDERN
 
 'UTIL_SPARSE' : {
 'ORDERN' : ['build_transpose','lanc','sparse_add','sparse_copy','sparse_getdimension','sparse_getpacksize','sparse_mask','sparse_mult',
@@ -75,6 +61,7 @@ GROUPS = {
 'ALLOCATIONS' : {
 '' : ['allocate_f','allocate_h','allocate_neigh','allocate_rho','allocate_umb','allocate_steered','reallocate_f','reallocate_h','reallocate_neigh',
         'reallocate_rho','allocate_dos','allocate_grid','allocate_trans'],
+'ORDERN':['allocate_ordern'],
 }, #END ALLOCATIONS
 
 'ASSEMBLERS' : {
@@ -85,8 +72,23 @@ GROUPS = {
         'getenergy_eh','assemble_h_ks','getenergy_KS','assemble_S','assemble_2c_S','assemble_hartree','assemble_scissor',
         'assemble_ca_2c_dip','assemble_ca_3c_dip','assemble_lr_dip','assemble_zw_1c_na','assemble_zw_2c_ct','assemble_zw_3c_ct','assemble_xczw',
         'assemble_zw_off_na','assemble_zw_on_na','build_zw_off_na','build_zw_on_na','assemble_1c_vdip','getenergy_zw'],
-'QMMM' : ['assemble_qmmm']
+'ORDERN' : ['assemble_2c_ordern_final','assemble_2c_ordern_init','assemble_3c_ordern_final','assemble_ca_2c_ordern_final',
+        'assemble_ca_3c_ordern_final','assemble_eh_2c_ordern_final'],
+#'QMMM' : ['assemble_qmmm']
 }, #END ASSEMBLERS
+
+'DASSEMBLERS' : {
+'' : ['Dassemble_2c','Dassemble_3c','Dassemble_ca_2c','Dassemble_ca_3c','Dassemble_eh_2c','Dassemble_hxc_2c','Dassemble_hxc_3c',
+        'Dassemble_lr','Dassemble_snxc_on','Dassemble_olsxc_on','Dassemble_olsxc_2c','Dassemble_olsxc_3c','Dassemble_snxc_2c','Dassemble_snxc_3c',
+        'Dassemble_2c_PP','Dassemble_3c_PP','Dassemble_ca_olsxc_on','Dassemble_ca_snxc_on','Dassemble_ca_snxc_3c','Dassemble_ca_olsxc_3c',
+        'Dassemble_ca_snxc_2c','Dassemble_ca_olsxc_2c','Dassemble_ca_2c_dip','Dassemble_ca_3c_dip',
+        'Dassemble_lr_dip','getforces_mcweda','getforces_eh','getforces_hxc','getforces_KS','getforces_classic','getforces_classic_RGL',
+        'getforces_classic_vdw','getforces','getforces_classic_tersoff','getforces_zw','Dassemble_zw_2c_ct','Dassemble_zw_3c_ct','Dassemble_zw_2c_na',
+        'Dassemble_zw_3c_na','Dassemble_zw_on_na'],
+'OPENMP' : ['Dassemble_lr_OMP'],
+'ORDERN' : ['Dassemble_2c_ordern_final','Dassemble_3c_ordern_final','Dassemble_ca_2c_ordern_final','Dassemble_ca_3c_ordern_final'],
+#'QMMM'   : ['Dassemble_qmmm','Dassemble_qmmm_dip']
+}, #END DASSEMBLERS
 
 'GRID' : {
 '' : ['assemble_KS_den0','assemble_KS_den','assemble_KS_usr','laplace_fft','assemble_KS_dcc','assemble_KS_mat','mixer_KS','writeout_charges_KS',
@@ -97,6 +99,7 @@ GROUPS = {
 '' : ['diagnostics','initatomicE','initconstraints','initcharges','initconstants','initboxes','initkpoints','initmasses','initneighbors',
         'welcome','make_mu2shell','make_munu','make_munuPP','restart','make_munuDipY','make_munuDipX','zero_ang_mom','initamat','make_munuS',
         'initNH','getkpoints','greatKAuto','greatKsubsAuto','initgrid','initdenmat','get_info_orbital','initbasics','initcharges_KS','initcDFT'],
+'MPI-k' : ['init_MPI'],
 }, #END INITIALIZERS
 
 'INTERPOLATERS' : {
@@ -145,9 +148,7 @@ GROUPS = {
 'integrals',
 'interactions',
 'kpoints',
-#'mpi_declarations',
 'neighbor_map',
-#'ordern',
 'umbrella',
 'steered',
 'optimization',
@@ -175,7 +176,9 @@ GROUPS = {
 'fb_socket',
 #'sockets',
 'classicMD',
-]
+],
+'MPI-k' : ['mpi_declarations'],
+'ORDERN': ['ordern'],
 }, #END MODULES
 
 'NEIGHBORS' : {
@@ -252,7 +255,8 @@ GROUPS = {
 }, #END NAC
 
 'QMMM' : {
-'QMMM' : ['main_loop_MDET_qmmm','main_loop_MD_qmmm','fireball_qmmm_loop'],
+'QMMM' : ['main_loop_MDET_qmmm','main_loop_MD_qmmm','fireball_qmmm_loop','assemble_qmmm','assemble_qmmm_dip','Dassemble_qmmm',
+        'Dassemble_qmmm_dip','Dassemble_qmmm_mdet','Dassemble_qmmm_mdet_dip'],
 }, #END QMMM
 
 'DFTD3' : {
@@ -260,3 +264,12 @@ GROUPS = {
 }, #END DFTD3
 
 } #END GROUPS
+
+
+
+
+
+SPECIAL_CC={
+#'init_MPI': ["-I/usr/local/mpich/include"],
+'init_MPI': ["-I/usr/include/mpich"],
+}

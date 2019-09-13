@@ -1,5 +1,5 @@
 
-MKL_PATH = "/home/prokop/SW/intel/"
+MKL_PATH = "/home/prokop/SW/intel"
 MPI_PATH = "/usr/lib/x86_64-linux-gnu/openmpi"
 
 def genLFLAGS( MKL_PATH=MKL_PATH, MPI_PATH=MPI_PATH ):

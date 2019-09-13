@@ -102,14 +102,13 @@ def toMakefile_obj_groups( fout, group_dict, group_names, var_names, build_path=
                     fout.write( " $(%s_%s)" %(name,var) )
             fout.write( "\n\n\n" )
 
-def toMakefile_cc_obj( fout, o, pre="../", post=".f90", fflags="$(FFLAGS)", compiler="$(F90)" ):
+def toMakefile_cc_obj( fout, o, pre="../", post=".f90", fflags="$(FFLAGS)", Iflags=" ", compiler="$(F90)" ):
     src = pre+o+post
     obj = o+".o"
     fout.write( obj+" : "+src+"\n" )
-    fout.write( "\t" + compiler + " " + fflags + " -c "+src + "\n" )
+    fout.write( "\t" + compiler + " " + fflags +" "+ Iflags + " -c "+src + "\n" )
 
-def toMakefile_cc_objs( fout, group_dict, group_names, var_names, src_path="", ccomment='*', ncomment=50 ):
-    ncl = 0
+def toMakefile_cc_objs( fout, group_dict, group_names, var_names, special_cc={}, src_path="", ccomment='*', ncomment=50 ):
     for name in group_names:
         varinants = group_dict[name]
         fout.write("\n\n")
@@ -121,7 +120,10 @@ def toMakefile_cc_objs( fout, group_dict, group_names, var_names, src_path="", c
             if var in varinants:
                 fout.write("#====== variant : '" + var +"'\n" )
                 for o in varinants[var]:
-                    toMakefile_cc_obj( fout, o, pre=src_path+name+"/" )
+                    Iflags=""
+                    if o in special_cc:
+                        Iflags=" ".join(special_cc[o])
+                    toMakefile_cc_obj( fout, o, pre=src_path+name+"/", Iflags=Iflags )
         fout.write("\n\n")
 
 def listToPython(fout, name, lst, pre="'", mid="' : [", post="],\n", nclmax=120 ):
@@ -206,12 +208,13 @@ if __name__ == "__main__":
 
     #build_path = "build/"
     src_path = "../SRC/"
-    MKL_PATH = "/home/prokop/SW/intel/"
+    #MKL_PATH = "/home/prokop/SW/intel"
+    MKL_PATH = "/home/prokop/intel"
     MPI_PATH = "/usr/lib/x86_64-linux-gnu/openmpi"
     FFLAGS, LFLAGS_, LPATHS = genFlags( ["OPT"], MKL_PATH=MKL_PATH, MPI_PATH=MPI_PATH )
 
     #variant_names_ = ['','DOUBLE','GAMMA']
-    variant_names_ = ['','DOUBLE']
+    variant_names_ = ['','DOUBLE','MPI-k','QMMM','ORDERN']
 
     with open("Makefile",'w') as fout:
         
@@ -228,27 +231,17 @@ if __name__ == "__main__":
         toMakefile_name( fout, "FFLAGS",  FFLAGS  )
         toMakefile_name( fout, "LFLAGS_", LFLAGS_ )
         toMakefile_name( fout, "LPATHS",  LPATHS  )
-        toMakefile_list_vars( fout, "LFLAGS", ["LPATHS",""] )
+        toMakefile_list_vars( fout, "LFLAGS", ["LPATHS","LFLAGS_"] )
         #toMakefile_name( fout, "FFLAGS", FFLAGS )
-
-
-        #writeTarget( fout, "fireball.x"       , "$(OBJECTS)"       , [OBJECTS       ] )
-        #writeTarget( fout, "fireball_server.x", "$(OBJECTS_SERVER)", [OBJECTS_SERVER] )
 
         writeTarget( fout, "fireball.x"       , "$(OBJECTS)", [OBJECTS       ] )
         writeTarget( fout, "fireball_server.x", "$(OBJECTS)", [OBJECTS_SERVER] )
-
-        #cclient.o : THERMOINT/cclient.c
-        #    $(CC) $(CFLAGS) -c THERMOINT/cclient.c
-
-        #toMakefile_cc_obj( fout, "sockets", pre="../MODULES/", post=".c", fflags="$(CFLAGS)", compiler="$(CC)" )
-        #toMakefile_cc_obj( fout, "cclient", pre="../MODULES/", post=".c", fflags="$(CFLAGS)", compiler="$(CC)" )
 
         toMakefile_cc_obj_c( fout, "sockets", pre="../MODULES/"   )
         toMakefile_cc_obj_c( fout, "cclient", pre="../THERMOINT/" )
         #toMakefile_cc_obj( fout, o, pre="../", post=".f90", fflags="$(FFLAGS)", compiler="$(F90)" )
 
-        toMakefile_cc_objs   ( fout, GROUPS, group_names, variant_names, src_path=src_path )
+        toMakefile_cc_objs   ( fout, GROUPS, group_names, variant_names, special_cc=SPECIAL_CC, src_path=src_path )
 
 
 

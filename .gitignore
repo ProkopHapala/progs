@@ -9,6 +9,7 @@
 *_backup
 *.bak
 
+*.log
 *.npy
 *.xsf
 *.png
