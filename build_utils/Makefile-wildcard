@@ -1,0 +1,245 @@
+FORM_RHO_ = denmat.f90 denmat_es.f90 denmat_KS.f90 fermie.f90 denmata_ordern_fk.f90 denmatb_ordern_fk.f90 denmatc_ordern_fk.f90 ss12_fk.f90 \
+	build_rho.f90 build_rho_KS.f90 build_Ji.f90 koopman.f90 build_nij.f90 project_eh.f90 project_wfmdet.f90 
+FORM_RHO_ORDERN = chebft.f90 denmata_ordern.f90 denmatb_ordern.f90 denmatc_ordern.f90 denmat_fk.f90 formrho_sparse.f90 ss12.f90 
+FORM_RHO = $(FORM_RHO_) $(FORM_RHO_ORDERN) 
+
+
+KSPACE_ = kspace.f90 kspace_KS.f90 kspace_ordern_fk.f90 diag_error.f90 diag_k.f90 diag_k_KS.f90 
+KSPACE_SCALAPACK = blacsaba.f90 kspace_MPI.f90 kspace_MPI_slave.f90 pclagetter.f90 pclaputter.f90 
+KSPACE_ORDERN = eandg.f90 xeandg.f90 formc_compact.f90 formsh_compact.f90 initguess.f90 kspace_fk.f90 kspace_ordern.f90 kspace_ordern_init.f90 \
+	kspace_ordern_slave.f90 ordern_init.f90 qralg.f90 set_dimensions.f90 set_maxdimension.f90 getsendrecv.f90 getstepsize.f90 
+KSPACE_LAPACK95 = kspace_l95.f90 
+KSPACE_DOUBLE = kspace2.f90 
+KSPACE_GAMMA = kspace_withnok.f90 
+KSPACE_MPI-k = kspace_MPI-k.f90 diag_k-MPI.f90 
+KSPACE = $(KSPACE_) $(KSPACE_SCALAPACK) $(KSPACE_ORDERN) $(KSPACE_LAPACK95) $(KSPACE_DOUBLE) $(KSPACE_GAMMA) $(KSPACE_MPI-k) 
+
+
+INITMPI = mpi_declarations.f90 init_MPI.f90 
+
+
+
+UTIL_ = anderson.f90 fixfrags.f90 fixfrags2.f90 hampiece.f90 push_atoms.f90 writeout_ac.f90 writeout_cd.f90 writeout_charges.f90 writeout_dipole.f90 \
+	writeout_comph.f90 writeout_neighbors.f90 writeout_xv.f90 writeout_neighborsPP.f90 hamtrans.f90 mixer.f90 den2mesh.f90 ew2mesh.f90 ew2mesh_gamma.f90 \
+	postscf.f90 den2mesh_import.f90 broyden.f90 louie.f90 pulay.f90 compute_neutral_rho_grid.f90 ew2mesh_fourier.f90 ew2mesh_kscan.f90 ew2mesh_ARPES.f90 \
+	project_orb.f90 project_orb_complex.f90 excitations.f90 kvaziband.f90 band_project.f90 ARPES_LCAO.f90 writeout_eigenvec.f90 writeout_eigenvec_G.f90 \
+	writeCoefsLCAO.f90 
+UTIL_OPENMP = anderson2.f90 
+UTIL_DOUBLE = anderson_l95.f90 
+UTIL_GAMMA = anderson2.f90 
+UTIL_MPI-k = anderson2.f90 diag_k-MPI_slave.f90 bcast_k-MPI.f90 bcast_k-MPI_slave.f90 
+UTIL = $(UTIL_) $(UTIL_OPENMP) $(UTIL_DOUBLE) $(UTIL_GAMMA) $(UTIL_MPI-k) 
+
+
+DASSEMBLERS_ = Dassemble_2c.f90 Dassemble_3c.f90 Dassemble_ca_2c.f90 Dassemble_ca_3c.f90 Dassemble_eh_2c.f90 Dassemble_hxc_2c.f90 Dassemble_hxc_3c.f90 \
+	Dassemble_lr.f90 Dassemble_snxc_on.f90 Dassemble_olsxc_on.f90 Dassemble_olsxc_2c.f90 Dassemble_olsxc_3c.f90 Dassemble_snxc_2c.f90 Dassemble_snxc_3c.f90 \
+	Dassemble_2c_PP.f90 Dassemble_3c_PP.f90 Dassemble_ca_olsxc_on.f90 Dassemble_ca_snxc_on.f90 Dassemble_ca_snxc_3c.f90 Dassemble_ca_olsxc_3c.f90 \
+	Dassemble_ca_snxc_2c.f90 Dassemble_ca_olsxc_2c.f90 Dassemble_qmmm.f90 Dassemble_qmmm_dip.f90 Dassemble_ca_2c_dip.f90 Dassemble_ca_3c_dip.f90 \
+	Dassemble_lr_dip.f90 getforces_mcweda.f90 getforces_eh.f90 getforces_hxc.f90 getforces_KS.f90 getforces_classic.f90 getforces_classic_RGL.f90 \
+	getforces_classic_vdw.f90 getforces.f90 getforces_classic_tersoff.f90 getforces_zw.f90 Dassemble_zw_2c_ct.f90 Dassemble_zw_3c_ct.f90 \
+	Dassemble_zw_2c_na.f90 Dassemble_zw_3c_na.f90 Dassemble_zw_on_na.f90 
+DASSEMBLERS_OPENMP = Dassemble_lr_OMP.f90 
+DASSEMBLERS = $(DASSEMBLERS_) $(DASSEMBLERS_OPENMP) 
+
+
+INTERACTIONS_ = cl_value.f90 Dtrescentros.f90 doscentros.f90 doscentrosPP.f90 get_vdw.f90 getHarmonic.f90 trescentros.f90 unocentros.f90 \
+	smoother.f90 doscentrosS.f90 trescentrosS.f90 DtrescentrosS.f90 dosgaussians.f90 gelements_VXC.f90 Dgelements_VXC.f90 gelementsG_VXC.f90 \
+	DgelementsG_VXC.f90 gelementsG_VNA.f90 DgelementsG_VNA.f90 gelementsGS_VXC.f90 DgelementsGS_VXC.f90 gelementsG_VNA_SH.f90 DgelementsG_VNA_SH.f90 \
+	gelementsG_VNA_SH_RNA.f90 DgelementsG_VNA_SH_RNA.f90 trescentrosGHXC_VXC.f90 DtrescentrosGHXC_VXC.f90 trescentrosG_VNA.f90 DtrescentrosG_VNA.f90 \
+	trescentrosG_VXC.f90 DtrescentrosG_VXC.f90 trescentrosGS_VXC.f90 DtrescentrosGS_VXC.f90 trescentrosG_VNA_SH.f90 DtrescentrosG_VNA_SH.f90 \
+	doscentrosGS_overlap.f90 gelementsGS_overlap.f90 DgelementsGS_overlap.f90 doscentrosG_overlap.f90 gelementsG_overlap.f90 DgelementsG_overlap.f90 \
+	internalLambda.f90 tester2c.f90 
+INTERACTIONS_SCALAPACK = doscentrosDipY.f90 doscentrosDipX.f90 get_ewald.f90 
+INTERACTIONS_ORDERN = get_ewald_OMP.f90 
+INTERACTIONS = $(INTERACTIONS_) $(INTERACTIONS_SCALAPACK) $(INTERACTIONS_ORDERN) 
+
+
+ORDERN = ordern.f90 allocate_ordern.f90 assemble_2c_ordern_final.f90 assemble_2c_ordern_init.f90 assemble_3c_ordern_final.f90 assemble_ca_2c_ordern_final.f90 \
+	assemble_ca_3c_ordern_final.f90 assemble_eh_2c_ordern_final.f90 Dassemble_2c_ordern_final.f90 Dassemble_3c_ordern_final.f90 Dassemble_ca_2c_ordern_final.f90 \
+	Dassemble_ca_3c_ordern_final.f90 
+
+
+
+UTIL_SPARSE = build_transpose.f90 lanc.f90 sparse_add.f90 sparse_copy.f90 sparse_getdimension.f90 sparse_getpacksize.f90 sparse_mask.f90 \
+	sparse_mult.f90 sparse_norm2.f90 sparse_pack.f90 sparse_pack_elements.f90 sparse_pack_indices.f90 sparse_unpack.f90 sparse_unpack_elements.f90 \
+	sparse_unpack_indices.f90 sparse_vecprod.f90 
+
+
+
+ALLOCATIONS = allocate_f.f90 allocate_h.f90 allocate_neigh.f90 allocate_rho.f90 allocate_umb.f90 allocate_steered.f90 reallocate_f.f90 \
+	reallocate_h.f90 reallocate_neigh.f90 reallocate_rho.f90 allocate_dos.f90 allocate_grid.f90 allocate_trans.f90 
+
+
+
+ASSEMBLERS_ = assemble_olsxc_1c.f90 assemble_hxc_1c.f90 assemble_2c.f90 assemble_3c.f90 assemble_ca_2c.f90 assemble_3c_PP.f90 assemble_ca_3c.f90 \
+	assemble_eh_2c.f90 assemble_eh_usr.f90 assemble_F.f90 assemble_hxc_2c.f90 assemble_hxc_3c.f90 assemble_lr.f90 assemble_sVNL.f90 assemble_usr.f90 \
+	buildh.f90 assemble_olsxc_on.f90 assemble_olsxc_off.f90 build_olsxc_on.f90 build_olsxc_off.f90 average_rho.f90 build_snxc_on.f90 build_snxc_off.f90 \
+	assemble_snxc_on.f90 assemble_snxc_off.f90 build_ca_snxc_on.f90 build_ca_olsxc_on.f90 assemble_h.f90 assemble_mcweda.f90 assemble_hxc.f90 \
+	assemble_eh.f90 getenergy.f90 getenergy_hxc.f90 getenergy_mcweda.f90 getenergy_eh.f90 assemble_h_ks.f90 getenergy_KS.f90 assemble_S.f90 assemble_2c_S.f90 \
+	assemble_hartree.f90 assemble_scissor.f90 assemble_qmmm.f90 assemble_ca_2c_dip.f90 assemble_ca_3c_dip.f90 assemble_lr_dip.f90 assemble_zw_1c_na.f90 \
+	assemble_zw_2c_ct.f90 assemble_zw_3c_ct.f90 assemble_xczw.f90 assemble_zw_off_na.f90 assemble_zw_on_na.f90 build_zw_off_na.f90 build_zw_on_na.f90 \
+	assemble_1c_vdip.f90 getenergy_zw.f90 
+
+
+
+GRID = assemble_KS_den0.f90 assemble_KS_den.f90 assemble_KS_usr.f90 laplace_fft.f90 assemble_KS_dcc.f90 assemble_KS_mat.f90 mixer_KS.f90 \
+	writeout_charges_KS.f90 writeout_xsf.f90 assemble_KS_vna.f90 get_Hort.f90 
+
+
+
+INITIALIZERS = diagnostics.f90 initatomicE.f90 initconstraints.f90 initcharges.f90 initconstants.f90 initboxes.f90 initkpoints.f90 initmasses.f90 \
+	initneighbors.f90 welcome.f90 make_mu2shell.f90 make_munu.f90 make_munuPP.f90 restart.f90 make_munuDipY.f90 make_munuDipX.f90 zero_ang_mom.f90 \
+	initamat.f90 make_munuS.f90 initNH.f90 getkpoints.f90 greatKAuto.f90 greatKsubsAuto.f90 initgrid.f90 initdenmat.f90 get_info_orbital.f90 initbasics.f90 \
+	initcharges_KS.f90 initcDFT.f90 
+
+
+
+INTERPOLATERS = buildspline_1d.f90 interpolate_1d.f90 interpolate_2d.f90 recover_2c.f90 recover_3c.f90 recover_PP.f90 recoverC.f90 setterp_2d.f90 \
+	recover_2cDipY.f90 recover_2cDipX.f90 recover_S.f90 buildspline2_1d.f90 getpsi.f90 getYlm.f90 getvna.f90 
+
+
+
+LOOPS = main_loop.f90 main_loop_MD.f90 main_loop_CG.f90 scf_loop.f90 scf_loop_harris.f90 main_loop_NEB.f90 main_loop_DM.f90 scf_loop_ks.f90 \
+	main_loop_importrho.f90 main_loop_TDSE.f90 main_loop_MDET.f90 main_loop_MIN.f90 main_loop_NAC.f90 main_loop_FIRE.f90 main_loop_socket.f90 
+
+
+
+MAIN = fireball.f90 
+
+
+
+MAIN_SERVER = fireball_server.f90 
+
+
+
+MAIN_SERVER_AMBER = fireball_server_amber.f90 
+
+
+
+MD = cross.f90 factorial.f90 predictor.f90 gaussT.f90 corrector.f90 imaged.f90 setgear.f90 phimat.f90 bvec.f90 soldm.f90 NHCThermostat.f90 get_enk.f90 \
+	writeHNose.f90 resetNHC.f90 move_ions.f90 
+
+
+
+MODULES = barrier.f90 charges.f90 configuration.f90 constants_fireball.f90 density.f90 dimensions.f90 forces.f90 fragments.f90 gaussG.f90 integrals.f90 \
+	interactions.f90 kpoints.f90 neighbor_map.f90 umbrella.f90 steered.f90 optimization.f90 module_dos.f90 dynamo.f90 cproc.f90 noseHoover.f90 scf.f90 \
+	grid.f90 wavefunction.f90 neb_module.f90 vnneutral.f90 transport.f90 matmultmod.f90 outputs.f90 options.f90 energy.f90 MD.f90 mpi_main.f90 tdse.f90 \
+	bias.f90 nonadiabatic.f90 hartree.f90 sockets.f90 fsockets.f90 fb_socket.f90 
+
+
+
+MODULES_C = classicMD.f90 
+
+
+
+NEIGHBORS = backnay.f90 common_neighbors.f90 find_neigh_max.f90 find_neigh_max_class.f90 mpairnay.f90 neighbors.f90 neighbors_pairs.f90 \
+	find_neighPP_max.f90 neighborsPP.f90 common_neighborsPP.f90 num_neigh_tot.f90 
+
+
+
+PRESSURE = hmetric.f90 initpressure.f90 invert3x3.f90 
+
+
+
+READFILES = append_string.f90 read_1c.f90 read_2c.f90 read_3c.f90 readbasis.f90 readbarrier.f90 readdata_2c.f90 readdata_3c.f90 readfragments.f90 \
+	readheader_2c.f90 readheader_3c.f90 readinfo.f90 readlvs.f90 readparam.f90 readphi.f90 readpressure.f90 readquench.f90 readsa.f90 readvdw.f90 \
+	readcgo.f90 readdos.f90 readgaussG.f90 findFdata.f90 readgrid.f90 read_wf.f90 read_vna.f90 readtrans.f90 readbind.f90 readhop.f90 readdata.f90 \
+	readdata_hxc.f90 readdata_mcweda.f90 readdata_xczw.f90 readdata_eh.f90 checksum_options.f90 readdata_KS.f90 getsections.f90 readdata_classicMD.f90 \
+	readhartree.f90 readephc.f90 
+
+
+
+ROTATIONS = chooser.f90 chooserd.f90 deps2center.f90 deps3center.f90 makeDmat.f90 makeDmatPP.f90 rotate.f90 rotated.f90 rotatedPP.f90 twister.f90 \
+	twisterd.f90 rotatePP.f90 epsilon.f90 
+
+
+
+THERMOINT = cclient.f90 
+
+
+
+SOCKETS = get_geometry.f90 create_socket.f90 send_geometry.f90 sendrecv.f90 soc_init.f90 
+
+
+
+UMBRELLA = assemble_umbrella.f90 Dassemble_umbrella.f90 get_umbrella.f90 readumbrella.f90 assemble_steered.f90 Dassemble_steered.f90 \
+	get_steered.f90 readsteered.f90 
+
+
+
+XC = ceperley_alder.f90 cepal.f90 
+
+
+
+CG = cgo.f90 bfgs.f90 l-bfgs-b.f90 FIRE.f90 
+
+
+
+DOS = dos.f90 invierte.f90 writeout_dos.f90 writeout_dosng.f90 hoppings.f90 writeout_atom.f90 hamilt_atom.f90 
+
+
+
+NEB = initneb.f90 neb.f90 
+
+
+
+TDSE = ete_loop.f90 psi2es.f90 eigenHS.f90 tddenmat.f90 tddiag_k.f90 diag_Sk.f90 diag_Hk.f90 allocate_tdse.f90 tdbc.f90 propTpsi.f90 readtdse.f90 \
+	initpsi.f90 ortho_H.f90 get_QLow.f90 get_QMul.f90 postete.f90 wrtout_psiT.f90 
+
+
+
+TRANS = assemble_t12_fit.f90 assemble_t12_bare.f90 calcG.f90 assemble_Hsam.f90 assemble_Gsam.f90 assemble_Dxx.f90 sqrt_mat.f90 interpolate_hop.f90 \
+	gethop.f90 
+
+
+
+BIAS = assemble_bias.f90 Dassemble_bias.f90 allocate_bias.f90 reallocate_bias.f90 readbias.f90 
+
+
+
+NAC = allocate_nac.f90 assemble_G_S.f90 nacouplings.f90 build_gover1c.f90 init_mdet.f90 mdetdenmat.f90 getforces_mdet.f90 save_mdetstuff.f90 \
+	evolve_ks_states.f90 deallocate_nac.f90 dcdt_nac.f90 Dassemble_2c_mdet.f90 Dassemble_2c_PP_mdet.f90 Dassemble_olsxc_on_mdet.f90 Dassemble_olsxc_2c_mdet.f90 \
+	Dassemble_3c_mdet.f90 Dassemble_3c_PP_mdet.f90 Dassemble_olsxc_3c_mdet.f90 fewest_switches.f90 mc_switch.f90 transition.f90 Dassemble_ca_2c_mdet.f90 \
+	Dassemble_ca_3c_mdet.f90 Dassemble_lr_mdet.f90 Dassemble_ca_olsxc_on_mdet.f90 Dassemble_ca_olsxc_2c_mdet.f90 Dassemble_ca_olsxc_3c_mdet.f90 \
+	move_correc.f90 move_predic.f90 
+
+QMMM = main_loop_MDET_qmmm.f90 main_loop_MD_qmmm.f90 fireball_qmmm_loop.f90 
+
+DFTD3 = common.f90 sizes.f90 pars.f90 core.f90 api.f90 dftd3_corrections.f90 
+
+SRC_COMMON = $(DFTD3) $(INITMPI) $(ORDERN) $(ALLOCATIONS) $(ASSEMBLERS) \
+	$(DASSEMBLERS) $(INITIALIZERS) $(INTERACTIONS) $(INTERPOLATERS) \
+	$(LOOPS) $(MD) $(NEIGHBORS) $(PRESSURE) $(READFILES) \
+	$(ROTATIONS) $(SOLVESH_DIAG) $(FORM_RHO) $(UMBRELLA) $(UTIL) \
+	$(UTIL_SPARSE) $(VISUALIZATION) $(XC) $(CG) $(DOS) $(THERMOINT) \
+	$(NEB) $(TRANS) $(GRID) $(TDSE) $(BIAS) $(NAC)
+
+SOURCE_FILES = $(MODULES_C) $(SRC_COMMON) $(MAIN)
+
+OBJ = /build
+
+#OBJECT_FILES = $(SOURCE_FILES:ASSEMBLERS/%.f90=$(OBJ)/%.f90)
+OBJECT_FILES = $(ASSEMBLERS_:ASSEMBLERS/%.f90=$(OBJ)/%.o)
+
+FFLAGS  = -O3 -mtune=native -ftree-vectorize  -ffree-form -ffree-line-length-none -freal-4-real-8 
+
+LPATHS  = -L/home/prokop/SW/intel/mkl/lib/intel64 -L/home/prokop/SW/intel/mkl/lib/intel64 -I/home/prokop/SW/intel/mkl/include/fftw -L/usr/lib/x86_64-linux-gnu/openmpi/lib -I/usr/lib/x86_64-linux-gnu/openmpi/include
+LDFLAGS = $(LPATHS) -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_lapack95_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -lfftw3xf_gnu -lm -Bdynamic -lmpi 
+
+#$(EXECUTABLE_FILES): $(OBJECT_FILES)
+#	@$(F90) $(LDFLAGS) -o $@ $^
+
+$(OBJECT_FILES): $(OBJ)/%.o: ASSEMBLERS/%.f90
+	$(F90) $(FFLAGS) -o $@ $<
+
+fireball.x : $(OBJECT_FILES)
+	$(F90) -o fireball.x  $(FFLAGS) $(OBJECT_FILES)  $(LDFLAGS)
+
+all : 
+	make fireball.x
+
+.PHONY :  clean
+
+clean : 
+	rm -f -r core *.o .nfs* rii_files fireball.x.ip*  *.mod ldtmp* *.vo *~ *.il
+

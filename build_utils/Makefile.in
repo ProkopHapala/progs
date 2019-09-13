@@ -1,0 +1,330 @@
+
+FORM_RHO = denmat.o denmat_es.o denmat_KS.o fermie.o denmata_ordern_fk.o \
+	denmatb_ordern_fk.o denmatc_ordern_fk.o ss12_fk.o build_rho.o \
+	build_rho_KS.o build_Ji.o koopman.o build_nij.o project_eh.o project_wfmdet.o
+
+KSPACE = kspace.o kspace_KS.o kspace_ordern_fk.o diag_error.o diag_k.o \
+	diag_k_KS.o
+
+INITMPI = init_noMPI.o
+
+UTIL = anderson.o fixfrags.o fixfrags2.o hampiece.o push_atoms.o \
+	writeout_ac.o writeout_cd.o writeout_charges.o  writeout_dipole.o writeout_comph.o \
+	writeout_neighbors.o writeout_xv.o writeout_neighborsPP.o \
+	hamtrans.o mixer.o den2mesh.o ew2mesh.o ew2mesh_gamma.o postscf.o den2mesh_import.o \
+	broyden.o louie.o pulay.o compute_neutral_rho_grid.o \
+	ew2mesh_fourier.o ew2mesh_kscan.o ew2mesh_ARPES.o \
+	project_orb.o project_orb_complex.o excitations.o kvaziband.o \
+	band_project.o ARPES_LCAO.o writeout_eigenvec.o writeout_eigenvec_G.o \
+	writeCoefsLCAO.o
+
+DASSEMBLERS = Dassemble_2c.o Dassemble_3c.o Dassemble_ca_2c.o \
+	Dassemble_ca_3c.o Dassemble_eh_2c.o Dassemble_hxc_2c.o \
+	Dassemble_hxc_3c.o Dassemble_lr.o  Dassemble_snxc_on.o \
+	Dassemble_olsxc_on.o Dassemble_olsxc_2c.o Dassemble_olsxc_3c.o \
+	Dassemble_snxc_2c.o Dassemble_snxc_3c.o Dassemble_2c_PP.o \
+	Dassemble_3c_PP.o Dassemble_ca_olsxc_on.o Dassemble_ca_snxc_on.o \
+	Dassemble_ca_snxc_3c.o Dassemble_ca_olsxc_3c.o \
+	Dassemble_ca_snxc_2c.o Dassemble_ca_olsxc_2c.o Dassemble_qmmm.o Dassemble_qmmm_dip.o \
+	Dassemble_ca_2c_dip.o Dassemble_ca_3c_dip.o Dassemble_lr_dip.o \
+	getforces_mcweda.o getforces_eh.o getforces_hxc.o \
+	getforces_KS.o getforces_classic.o getforces_classic_RGL.o getforces_classic_vdw.o \
+	getforces.o getforces_classic_tersoff.o \
+	getforces_zw.o Dassemble_zw_2c_ct.o \
+	Dassemble_zw_3c_ct.o Dassemble_zw_2c_na.o Dassemble_zw_3c_na.o \
+        Dassemble_zw_on_na.o
+
+INTERACTIONS = cl_value.o Dtrescentros.o doscentros.o doscentrosPP.o  \
+	doscentrosDipY.o doscentrosDipX.o  \
+	get_ewald.o get_vdw.o getHarmonic.o trescentros.o unocentros.o \
+	smoother.o  doscentrosS.o trescentrosS.o DtrescentrosS.o \
+	dosgaussians.o \
+	gelements_VXC.o Dgelements_VXC.o \
+	gelementsG_VXC.o  DgelementsG_VXC.o \
+	gelementsG_VNA.o  DgelementsG_VNA.o \
+	gelementsGS_VXC.o DgelementsGS_VXC.o \
+	gelementsG_VNA_SH.o DgelementsG_VNA_SH.o \
+	gelementsG_VNA_SH_RNA.o DgelementsG_VNA_SH_RNA.o \
+	trescentrosGHXC_VXC.o  DtrescentrosGHXC_VXC.o \
+	trescentrosG_VNA.o  DtrescentrosG_VNA.o \
+	trescentrosG_VXC.o  DtrescentrosG_VXC.o \
+	trescentrosGS_VXC.o DtrescentrosGS_VXC.o \
+	trescentrosG_VNA_SH.o DtrescentrosG_VNA_SH.o \
+	doscentrosGS_overlap.o gelementsGS_overlap.o DgelementsGS_overlap.o \
+	doscentrosG_overlap.o gelementsG_overlap.o DgelementsG_overlap.o \
+	internalLambda.o tester2c.o
+
+# BEGIN SCALAPACK 
+ifneq (,$(findstring SCALAPACK, ${METHOD}))
+KSPACE = blacsaba.o diag_error.o kspace_ordern_fk.o kspace_MPI.o \
+		kspace_MPI_slave.o pclagetter.o pclaputter.o diag_k.o \
+		diag_k_KS.o kspace_KS.o
+INITMPI = mpi_declarations.o init_MPI.o
+UTIL = anderson2.o fixfrags.o fixfrags2.o hampiece.o push_atoms.o \
+	writeout_ac.o writeout_cd.o writeout_charges.o writeout_dipole.o writeout_comph.o \
+	writeout_neighbors.o writeout_xv.o writeout_neighborsPP.o \
+	hamtrans.o mixer.o den2mesh.o ew2mesh.o ew2mesh_gamma.o postscf.o den2mesh_import.o \
+	broyden.o louie.o pulay.o  compute_neutral_rho_grid.o \
+	ew2mesh_fourier.o ew2mesh_kscan.o ew2mesh_ARPES.o \
+	project_orb.o project_orb_complex.o excitations.o kvaziband.o \
+	band_project.o ARPES_LCAO.o writeout_eigenvec.o writeout_eigenvec_G.o \
+	writeCoefsLCAO.o
+endif  SCALAPACK
+
+# OPENMP 
+ifneq (,$(findstring OPENMP, ${PARALLEL}))
+DASSEMBLERS = Dassemble_2c.o Dassemble_3c.o Dassemble_ca_2c.o \
+	Dassemble_ca_3c.o Dassemble_eh_2c.o Dassemble_hxc_2c.o \
+	Dassemble_hxc_3c.o Dassemble_lr_OMP.o  Dassemble_snxc_on.o \
+	Dassemble_olsxc_on.o Dassemble_olsxc_2c.o Dassemble_olsxc_3c.o \
+	Dassemble_snxc_2c.o Dassemble_snxc_3c.o Dassemble_2c_PP.o \
+	Dassemble_3c_PP.o Dassemble_ca_olsxc_on.o Dassemble_ca_snxc_on.o \
+	Dassemble_ca_snxc_3c.o Dassemble_ca_olsxc_3c.o \
+	Dassemble_ca_snxc_2c.o Dassemble_ca_olsxc_2c.o Dassemble_qmmm.o Dassemble_qmmm_dip.o\
+	getforces_mcweda.o getforces_eh.o getforces_hxc.o \
+	getforces_KS.o getforces_classic.o getforces_classic_vdw.o getforces_classic_RGL.o getforces_classic_tersoff.o
+INTERACTIONS = cl_value.o Dtrescentros.o doscentros.o doscentrosPP.o  \
+	get_ewald_OMP.o get_vdw.o getHarmonic.o trescentros.o unocentros.o \
+	smoother.o  doscentrosS.o trescentrosS.o DtrescentrosS.o \
+	dosgaussians.o \
+	gelements_VXC.o Dgelements_VXC.o \
+	gelementsG_VXC.o  DgelementsG_VXC.o \
+	gelementsG_VNA.o  DgelementsG_VNA.o \
+	gelementsGS_VXC.o DgelementsGS_VXC.o \
+	gelementsG_VNA_SH.o DgelementsG_VNA_SH.o \
+	gelementsG_VNA_SH_RNA.o DgelementsG_VNA_SH_RNA.o \
+	trescentrosGHXC_VXC.o  DtrescentrosGHXC_VXC.o \
+	trescentrosG_VNA.o  DtrescentrosG_VNA.o \
+	trescentrosG_VXC.o  DtrescentrosG_VXC.o \
+	trescentrosGS_VXC.o DtrescentrosGS_VXC.o \
+	trescentrosG_VNA_SH.o DtrescentrosG_VNA_SH.o \
+	doscentrosGS_overlap.o gelementsGS_overlap.o DgelementsGS_overlap.o \
+	doscentrosG_overlap.o gelementsG_overlap.o DgelementsG_overlap.o \
+	internalLambda.o tester2c.o
+endif OPENMP 
+
+# ORDERN
+ifneq (,$(findstring ORDERN, ${METHOD}))
+ORDERN = ordern.o allocate_ordern.o assemble_2c_ordern_final.o \
+	assemble_2c_ordern_init.o assemble_3c_ordern_final.o \
+	assemble_ca_2c_ordern_final.o assemble_ca_3c_ordern_final.o \
+	assemble_eh_2c_ordern_final.o \
+	Dassemble_2c_ordern_final.o \
+	Dassemble_3c_ordern_final.o \
+	Dassemble_ca_2c_ordern_final.o Dassemble_ca_3c_ordern_final.o \
+FORM_RHO = chebft.o denmata_ordern.o denmatb_ordern.o denmatc_ordern.o \
+	denmat_fk.o formrho_sparse.o ss12.o build_rho.o build_rho_KS.o
+KSPACE = eandg.o xeandg.o formc_compact.o formsh_compact.o initguess.o \
+	kspace_fk.o kspace_ordern.o kspace_ordern_init.o \
+	kspace_ordern_slave.o ordern_init.o qralg.o set_dimensions.o \
+	set_maxdimension.o getsendrecv.o getstepsize.o
+UTIL_SPARSE = build_transpose.o lanc.o sparse_add.o sparse_copy.o \
+	sparse_getdimension.o sparse_getpacksize.o sparse_mask.o \
+	sparse_mult.o sparse_norm2.o sparse_pack.o \
+	sparse_pack_elements.o sparse_pack_indices.o sparse_unpack.o \
+	sparse_unpack_elements.o sparse_unpack_indices.o \
+	sparse_vecprod.o 
+INITMPI = mpi_declarations.o init_MPI.o
+endif  ORDERN
+
+# LAPACK_95
+ifneq (,$(findstring LAPACK95, ${METHOD}))
+KSPACE = kspace_l95.o kspace_ordern_fk.o diag_error.o diag_k.o \
+	diag_k_KS.o
+UTIL = anderson_l95.o fixfrags.o fixfrags2.o hampiece.o push_atoms.o \
+	writeout_ac.o writeout_cd.o writeout_charges.o writeout_dipole.o writeout_comph.o \
+	writeout_neighbors.o writeout_xv.o writeout_neighborsPP.o \
+	hamtrans.o mixer.o den2mesh.o ew2mesh.o ew2mesh_gamma.o postscf.o den2mesh_import.o \
+	broyden.o louie.o pulay.o  compute_neutral_rho_grid.o \
+	ew2mesh_fourier.o ew2mesh_kscan.o ew2mesh_ARPES.o \
+	project_orb.o project_orb_complex.o excitations.o kvaziband.o \
+	band_project.o ARPES_LCAO.o writeout_eigenvec.o writeout_eigenvec_G.o \
+	writeCoefsLCAO.o
+endif LAPACK_95
+
+# DOUBLE
+ifneq (,$(findstring DOUBLE, ${METHOD}))
+KSPACE = kspace2.o kspace_KS.o kspace_ordern_fk.o diag_error.o diag_k.o \
+	diag_k_KS.o
+UTIL = anderson2.o fixfrags.o fixfrags2.o hampiece.o push_atoms.o \
+	writeout_ac.o writeout_cd.o writeout_charges.o writeout_dipole.o writeout_comph.o \
+	writeout_neighbors.o writeout_xv.o writeout_neighborsPP.o \
+	hamtrans.o mixer.o den2mesh.o ew2mesh.o ew2mesh_gamma.o postscf.o den2mesh_import.o \
+	broyden.o louie.o pulay.o compute_neutral_rho_grid.o \
+	ew2mesh_fourier.o ew2mesh_kscan.o ew2mesh_ARPES.o \
+	project_orb.o project_orb_complex.o excitations.o kvaziband.o \
+	band_project.o ARPES_LCAO.o writeout_eigenvec.o writeout_eigenvec_G.o \
+	writeCoefsLCAO.o
+endif DOUBLE
+
+# GAMMA    -  REAL ARITHMETICS (only gamma k-point)
+ifneq (,$(findstring GAMMA, ${METHOD}))
+KSPACE = kspace_withnok.o kspace_KS.o kspace_ordern_fk.o diag_error.o diag_k.o \
+	diag_k_KS.o
+UTIL = anderson2.o fixfrags.o fixfrags2.o hampiece.o push_atoms.o \
+	writeout_ac.o writeout_cd.o writeout_charges.o writeout_dipole.o writeout_comph.o \
+	writeout_neighbors.o writeout_xv.o writeout_neighborsPP.o \
+	hamtrans.o mixer.o den2mesh.o ew2mesh.o ew2mesh_gamma.o postscf.o den2mesh_import.o \
+	broyden.o louie.o pulay.o compute_neutral_rho_grid.o \
+	ew2mesh_fourier.o ew2mesh_kscan.o ew2mesh_ARPES.o \
+	project_orb.o project_orb_complex.o excitations.o kvaziband.o \
+	band_project.o ARPES_LCAO.o writeout_eigenvec.o writeout_eigenvec_G.o \
+	writeCoefsLCAO.o
+endif GAMMA 
+
+# MPI-k
+ifneq (,$(findstring MPI-k, ${PARALLEL}))
+KSPACE = kspace_MPI-k.o kspace_ordern_fk.o diag_error.o diag_k-MPI.o
+UTIL = anderson2.o fixfrags.o fixfrags2.o hampiece.o push_atoms.o \
+	writeout_ac.o writeout_cd.o writeout_charges.o writeout_dipole.o writeout_comph.o \
+	writeout_neighbors.o writeout_xv.o writeout_neighborsPP.o \
+	hamtrans.o mixer.o diag_k-MPI_slave.o bcast_k-MPI.o bcast_k-MPI_slave.o \
+	den2mesh.o ew2mesh.o ew2mesh_gamma.o postscf.o den2mesh_import.o \
+	broyden.o louie.o pulay.o compute_neutral_rho_grid.o \
+	ew2mesh_fourier.o ew2mesh_kscan.o ew2mesh_ARPES.o \
+	project_orb.o project_orb_complex.o excitations.o kvaziband.o \
+	band_project.o ARPES_LCAO.o writeout_eigenvec.o writeout_eigenvec_G.o \
+	writeCoefsLCAO.o
+INITMPI = mpi_declarations.o init_MPI.o
+endif MPI-k
+
+ALLOCATIONS = allocate_f.o allocate_h.o allocate_neigh.o allocate_rho.o \
+	allocate_umb.o allocate_steered.o reallocate_f.o reallocate_h.o reallocate_neigh.o \
+	reallocate_rho.o allocate_dos.o allocate_grid.o allocate_trans.o 
+
+ASSEMBLERS = assemble_olsxc_1c.o assemble_hxc_1c.o assemble_2c.o assemble_3c.o \
+	assemble_ca_2c.o assemble_3c_PP.o assemble_2c_PP.o\
+	assemble_ca_3c.o assemble_eh_2c.o assemble_eh_usr.o assemble_F.o \
+	assemble_hxc_2c.o assemble_hxc_3c.o assemble_lr.o assemble_sVNL.o \
+	assemble_usr.o buildh.o assemble_olsxc_on.o assemble_olsxc_off.o \
+	build_olsxc_on.o build_olsxc_off.o average_rho.o average_ca_rho.o\
+	build_snxc_on.o build_snxc_off.o assemble_snxc_on.o \
+	assemble_snxc_off.o build_ca_snxc_on.o build_ca_olsxc_on.o \
+	assemble_h.o assemble_mcweda.o assemble_hxc.o assemble_eh.o \
+	getenergy.o getenergy_hxc.o getenergy_mcweda.o getenergy_eh.o \
+	assemble_h_ks.o getenergy_KS.o assemble_S.o assemble_2c_S.o \
+	assemble_hartree.o assemble_scissor.o assemble_qmmm.o assemble_qmmm_dip.o\
+	assemble_ca_2c_dip.o assemble_ca_3c_dip.o assemble_lr_dip.o \
+        assemble_zw_1c_na.o assemble_zw_2c_ct.o assemble_zw_3c_ct.o \
+        assemble_xczw.o assemble_zw_off_na.o assemble_zw_on_na.o \
+        build_zw_off_na.o build_zw_on_na.o assemble_1c_vdip.o \
+        getenergy_zw.o
+
+
+GRID = assemble_KS_den0.o assemble_KS_den.o assemble_KS_usr.o laplace_fft.o \
+	assemble_KS_dcc.o assemble_KS_mat.o mixer_KS.o writeout_charges_KS.o \
+	writeout_xsf.o assemble_KS_vna.o get_Hort.o
+
+INITIALIZERS = diagnostics.o initatomicE.o initconstraints.o initcharges.o \
+	initconstants.o initboxes.o initkpoints.o initmasses.o initneighbors.o \
+	welcome.o make_mu2shell.o make_munu.o make_munuPP.o restart.o \
+        make_munuDipY.o make_munuDipX.o \
+	zero_ang_mom.o initamat.o make_munuS.o initNH.o getkpoints.o \
+	greatKAuto.o greatKsubsAuto.o initgrid.o initdenmat.o \
+	get_info_orbital.o initbasics.o initcharges_KS.o initcDFT.o 
+
+INTERPOLATERS = buildspline_1d.o interpolate_1d.o interpolate_2d.o \
+	recover_2c.o recover_3c.o recover_PP.o recoverC.o setterp_2d.o \
+	recover_2cDipY.o recover_2cDipX.o \
+	recover_S.o buildspline2_1d.o getpsi.o getYlm.o getvna.o
+
+LOOPS = main_loop.o main_loop_MD.o main_loop_CG.o scf_loop.o scf_loop_harris.o \
+	main_loop_NEB.o main_loop_DM.o scf_loop_ks.o main_loop_importrho.o \
+	main_loop_TDSE.o main_loop_MDET.o main_loop_MIN.o main_loop_NAC.o \
+	main_loop_FIRE.o main_loop_socket.o
+
+MAIN = fireball.o 
+
+MAIN_SERVER = fireball_server.o
+
+MAIN_SERVER_AMBER = fireball_server_amber.o
+
+MD = cross.o factorial.o predictor.o gaussT.o corrector.o imaged.o setgear.o \
+	phimat.o bvec.o soldm.o NHCThermostat.o get_enk.o writeHNose.o resetNHC.o \
+	move_ions.o
+
+MODULES = barrier.o charges.o configuration.o constants_fireball.o density.o \
+	dimensions.o forces.o fragments.o gaussG.o integrals.o interactions.o \
+	kpoints.o neighbor_map.o umbrella.o  steered.o optimization.o module_dos.o \
+	dynamo.o cproc.o noseHoover.o scf.o grid.o wavefunction.o neb_module.o \
+	vnneutral.o transport.o matmultmod.o outputs.o options.o energy.o \
+	MD.o  mpi_main.o tdse.o bias.o nonadiabatic.o hartree.o sockets.o fsockets.o fb_socket.o
+
+MODULES_C =  $(MODULES) classicMD.o
+
+NEIGHBORS = backnay.o common_neighbors.o find_neigh_max.o find_neigh_max_class.o \
+	mpairnay.o neighbors.o neighbors_pairs.o find_neighPP_max.o neighborsPP.o \
+	common_neighborsPP.o num_neigh_tot.o
+
+PRESSURE = hmetric.o initpressure.o invert3x3.o
+
+READFILES = append_string.o read_1c.o read_2c.o read_3c.o readbasis.o \
+	readbarrier.o readdata_2c.o readdata_3c.o readfragments.o \
+	readheader_2c.o readheader_3c.o readinfo.o readlvs.o \
+	readparam.o readphi.o readpressure.o readquench.o \
+	readsa.o readvdw.o readcgo.o readdos.o \
+	readgaussG.o findFdata.o readgrid.o read_wf.o read_vna.o \
+	readtrans.o readbind.o readhop.o readdata.o readdata_hxc.o \
+	readdata_mcweda.o readdata_xczw.o readdata_eh.o checksum_options.o readdata_KS.o \
+	getsections.o readdata_classicMD.o readhartree.o readephc.o
+
+ROTATIONS = chooser.o chooserd.o deps2center.o deps3center.o makeDmat.o \
+	makeDmatPP.o rotate.o rotated.o rotatedPP.o twister.o twisterd.o \
+	rotatePP.o epsilon.o
+
+THERMOINT = cclient.o 
+
+SOCKETS = get_geometry.o create_socket.o send_geometry.o sendrecv.o soc_init.o
+
+UMBRELLA = assemble_umbrella.o Dassemble_umbrella.o get_umbrella.o \
+	readumbrella.o assemble_steered.o Dassemble_steered.o \
+        get_steered.o readsteered.o
+
+XC = ceperley_alder.o cepal.o
+
+CG = cgo.o bfgs.o l-bfgs-b.o FIRE.o
+
+DOS = dos.o invierte.o writeout_dos.o writeout_dosng.o hoppings.o writeout_atom.o \
+	hamilt_atom.o 
+
+NEB = initneb.o neb.o
+
+TDSE = ete_loop.o psi2es.o eigenHS.o tddenmat.o tddiag_k.o \
+	diag_Sk.o diag_Hk.o allocate_tdse.o tdbc.o propTpsi.o \
+	readtdse.o initpsi.o ortho_H.o get_QLow.o get_QMul.o \
+	postete.o wrtout_psiT.o
+
+TRANS = assemble_t12_fit.o assemble_t12_bare.o  calcG.o  assemble_Hsam.o \
+	assemble_Gsam.o assemble_Dxx.o sqrt_mat.o interpolate_hop.o gethop.o
+
+BIAS = assemble_bias.o Dassemble_bias.o allocate_bias.o reallocate_bias.o \
+	readbias.o
+
+NAC = allocate_nac.o assemble_G_S.o nacouplings.o build_gover1c.o init_mdet.o \
+      mdetdenmat.o getforces_mdet.o save_mdetstuff.o evolve_ks_states.o \
+      deallocate_nac.o delta_t_ks.o dcdt_nac.o Dassemble_2c_mdet.o \
+      Dassemble_2c_PP_mdet.o Dassemble_olsxc_on_mdet.o Dassemble_olsxc_2c_mdet.o \
+      Dassemble_3c_mdet.o Dassemble_3c_PP_mdet.o Dassemble_olsxc_3c_mdet.o \
+      fewest_switches.o mc_switch.o transition.o \
+      Dassemble_ca_2c_mdet.o Dassemble_ca_3c_mdet.o \
+      Dassemble_lr_mdet.o \
+      Dassemble_ca_olsxc_on_mdet.o Dassemble_ca_olsxc_2c_mdet.o \
+      Dassemble_ca_olsxc_3c_mdet.o move_correc.o move_predic.o overlap_sign.o \
+      check_swap.o overlap_numeric.o getnac.o MCsolar.o Dassemble_qmmm_mdet.o \
+      Dassemble_ca_2c_mdet_dip.o Dassemble_qmmm_mdet_dip.o \
+      Dassemble_ca_3c_mdet_dip.o Dassemble_lr_mdet_dip.o
+
+QMMM =  main_loop_MDET_qmmm.o main_loop_MD_qmmm.o fireball_qmmm_loop.o
+
+DFTD3 = common.o sizes.o pars.o core.o api.o dftd3_corrections.o
+
+NAC = allocate_nac.o assemble_G_S.o nacouplings.o build_gover1c.o init_mdet.o \
+      mdetdenmat.o getforces_mdet.o save_mdetstuff.o evolve_ks_states.o \
+      deallocate_nac.o dcdt_nac.o Dassemble_2c_mdet.o \
+      Dassemble_2c_PP_mdet.o Dassemble_olsxc_on_mdet.o Dassemble_olsxc_2c_mdet.o \
+      Dassemble_3c_mdet.o Dassemble_3c_PP_mdet.o Dassemble_olsxc_3c_mdet.o \
+      fewest_switches.o mc_switch.o transition.o \
+      Dassemble_ca_2c_mdet.o Dassemble_ca_3c_mdet.o Dassemble_lr_mdet.o \
+      Dassemble_ca_olsxc_on_mdet.o Dassemble_ca_olsxc_2c_mdet.o \
+      Dassemble_ca_olsxc_3c_mdet.o move_correc.o move_predic.o
+

@@ -1,6 +1,7 @@
 *~
 *.x
 *.o
+*.a
 *.mod
 *.so
 *.pyc
@@ -10,3 +11,5 @@
 *.npy
 *.xsf
 *.png
+
+build
