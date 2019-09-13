@@ -7,6 +7,7 @@
 *.pyc
 *.pyd
 *_backup
+*.bak
 
 *.npy
 *.xsf
