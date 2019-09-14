@@ -55,16 +55,27 @@
 !
 ! Program Declaration
 ! ===========================================================================
-        subroutine diag_k (natoms, nprocs, my_proc, Kscf, iqout, icluster,  &
-     &                     iwrteigen, iwrtdos, iwrthop, iwrtatom)
+!        subroutine diag_k (natoms, nprocs, my_proc, Kscf, iqout, icluster,  &
+!     &                     iwrteigen, iwrtdos, iwrthop, iwrtatom)
+
+        subroutine diag_k ()
 
         use configuration
-        use mpi_declarations  
         use density
         use dimensions
         use interactions
         use neighbor_map
         use kpoints
+
+        use options
+        use outputs
+        use mpi_main
+        use transport
+        use scf
+        use module_dos
+
+        use mpi_declarations
+
         implicit none
 
         include 'mpif.h'
@@ -72,20 +83,20 @@
 ! Argument Declaration and Description
 ! ===========================================================================
 ! Input
-        integer, intent (in) :: icluster
-        integer, intent (in) :: iqout
-        integer, intent (in) :: iwrteigen
-        integer, intent (in) :: Kscf
-        integer, intent (in) :: natoms
-        integer, intent (in) :: nprocs
-        integer, intent (in) :: my_proc
+!        integer, intent (in) :: icluster
+!        integer, intent (in) :: iqout
+!        integer, intent (in) :: iwrteigen
+!        integer, intent (in) :: Kscf
+!        integer, intent (in) :: natoms
+!        integer, intent (in) :: nprocs
+!        integer, intent (in) :: my_proc
 ! CGP
-        integer, intent (in) :: iwrtdos
-        integer, intent (in) :: iwrthop
-        integer, intent (in) :: iwrtatom
+!        integer, intent (in) :: iwrtdos
+!        integer, intent (in) :: iwrthop
+!        integer, intent (in) :: iwrtatom
 ! end CGP
 ! MPI
-        integer, dimension (5) :: buffer_int
+!        integer, dimension (5) :: buffer_int
 
 ! Output
 

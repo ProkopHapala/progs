@@ -473,7 +473,7 @@
 100     format (2x, ' eigenvalue(1) = ', f10.6, &
      &              ' eigenvalue(norbitals) = ', f10.6)
 200     format (4(2x, f12.4))
-300     format (2x, <norbitals>f12.4)
+!300     format (2x, <norbitals>f12.4)
 301     format (2x, 2i2,2f12.4)
 302     format (2x, 4i4,3f12.4)
 

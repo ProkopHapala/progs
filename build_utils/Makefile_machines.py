@@ -25,10 +25,13 @@ MODMPI     = "-I/usr/local/mpich/include"
 VISFLAGS   = ""
 
 _FFLAGS = {
-''         : "-ffree-form -ffree-line-length-none -freal-4-real-8 ",
-'OPT'      : "-O3 -mtune=native -ftree-vectorize ",
-'VERY_OPT' : "-Ofast -march=native -mtune=native ",
-'DEBUG'    : "-Og -g -fbounds-check ",
+    'F90'      : " -freal-4-real-8 -ffree-form -ffree-line-length-none ",
+    'F77'      : " -freal-4-real-8 ",
+    'CC'       : " -freal-4-real-8 -ffree-form -ffree-line-length-none ",
+    'OPT'      : " -O3 -mtune=native -ftree-vectorize ",
+    'VERY_OPT' : " -Ofast -march=native -mtune=native ",
+    'DEBUG'    : " -Og -g -fbounds-check -Wall -Wno-tabs",
+    'DEBUGw'   : " -Og -g -fbounds-check ",
 }
 
 _LFLAGS = {
@@ -42,14 +45,3 @@ _PARLFLAGS = {
 'SCALAPACK' : " -L/opt/intel/mkl72cluster/lib/em64t -lmkl_scalapack -lmkl_blacsF77init_intelmpi -lmkl_blacs_intelmpi \
                 -lmkl_blacs_intelmpi -lmkl_blacs_intelmpi -lmkl_lapack -lmkl_def -lguide -lpthread -lg2c",
 }
-
-def genFlag(mods, FLAG ):
-    mods.append('')
-    return " ".join([ FLAG[mod] for mod in mods if mod in FLAG ])
-
-def genFlags( mods, MKL_PATH=MKL_PATH, MPI_PATH=MPI_PATH ):
-    FFLAGS    = genFlag(mods, _FFLAGS    )
-    #LFLAGS   = genFlag(mods, _LFLAGS    )
-    LFLAGS, LPATHS   = genLFLAGS( MKL_PATH=MKL_PATH, MPI_PATH=MPI_PATH )
-    #PARLFLAGS = genFlag(mods, _PARLFLAGS )
-    return FFLAGS, LFLAGS, LPATHS

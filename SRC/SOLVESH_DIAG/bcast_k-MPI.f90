@@ -56,8 +56,27 @@
 ! Program Declaration
 ! ===========================================================================
 
+        ! use configuration
+        ! use density
+        ! use dimensions
+        ! use interactions
+        ! use neighbor_map
+        ! use kpoints
+
+        ! use options
+        ! use outputs
+        ! use mpi_main
+        ! use transport
+        ! use scf
+        ! use module_dos
+
+        ! use mpi_declarations
+
+
+
 ! Broadcast data only once
-        subroutine  Bcast_data_0 (natoms, iqout, Kscf)
+        !subroutine  Bcast_data_0 (natoms, iqout, Kscf)
+        subroutine  Bcast_data_0 ( iqout, Kscf )
           use mpi_declarations
           use interactions
           use configuration
@@ -66,7 +85,7 @@
 
           include 'mpif.h'
 
-          integer, intent (in) :: natoms
+          !integer, intent (in) :: natoms
           integer, intent (in) :: iqout
           integer, intent (in) :: Kscf
 
@@ -101,7 +120,8 @@
 !=============================================================================
 
 ! Broadcast data only once
-        subroutine Bcast_data_1 (natoms)
+!        subroutine Bcast_data_1 (natoms)
+        subroutine Bcast_data_1 ()
           use mpi_declarations
           use neighbor_map
           use interactions
@@ -110,7 +130,7 @@
 
           include 'mpif.h'
 
-          integer, intent (in) :: natoms
+          !integer, intent (in) :: natoms
 
           integer ierror
           integer int_mybuffer (2)
