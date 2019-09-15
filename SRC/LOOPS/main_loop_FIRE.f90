@@ -189,7 +189,7 @@ subroutine move_ions_FIRE( istep )
 	use configuration
 	use forces
 	use fragments
-        use energy, only: deltaFmax
+	use energy, only: deltaFmax
 
  implicit none
 ! == arguments 
