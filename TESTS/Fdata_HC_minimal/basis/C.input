@@ -1,0 +1,19 @@
+C                                  atom name
+006                                 atomic number
+12.011                                 atomic mass
+cinput/006.pp                     pseudopotential filename
+cinput/006_450.na0
+2                                     number of shells
+0                                     l of the shell-1
+1.00                            #1.00   xn1 occupation number
+4.50                cutoff
+cinput/006_450.wf1           wavefunction filename
+cinput/006_450.na1           state-2 potential filename
+1                                     l of the shell-2
+3.00                           #1.25   xn1 occupation number
+4.50                cutoff
+cinput/006_450.wf2           wavefunction filename
+cinput/006_450.na2           state-4 potential filename
+1
+0.5                                   dq of the changed shell for xc
+0.25 0.25 0.25 0.25 0.25 0.25

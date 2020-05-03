@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#PATH=$PATH:/home/prokop/SW/intel/mkl/lib/intel64
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/prokop/SW/intel/mkl/lib/intel64
+
 #export OMP_NUM_THREADS=1 #important for some calculations on super-computers
 tar -zxf Fdata.tar.gz
 

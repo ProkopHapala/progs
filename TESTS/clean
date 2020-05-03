@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm -r Fdata_*
+#rm -r Fdata_*
 cd distorted_benzene
 
 rm  Fdata fireball.in CHARGES NEIGHBORS* Atomo_* answer* modes.xyz struc.inp \

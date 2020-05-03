@@ -279,10 +279,10 @@ if __name__ == "__main__":
         toMakefile_cc_objs   ( fout, groups, var_names )
     with open("Makefile_objects-New.py",'w') as fout:
         toPython_groups( fout, groups, var_names )
-    '''
 
     fomatLinkLog( "link_ref.log", "link_ref.log" )
     fomatLinkLog( "link.log", "link.log" )
+    '''
 
     import Makefile_targets
     import Makefile_machines
@@ -308,7 +308,9 @@ if __name__ == "__main__":
     print " inv_SPECIAL_CC : ",  inv_SPECIAL_CC
 
     #build_path = "build/"
-    src_path = "../SRC/"
+    src_path_make  = "../SRC/"
+    src_path_check = "SRC/"
+    #src_path = "SRC/"
     #MKL_PATH = "/home/prokop/SW/intel"
     MKL_PATH = "/home/prokop/intel"
     MPI_PATH = "/usr/lib/x86_64-linux-gnu/openmpi"
@@ -340,52 +342,55 @@ if __name__ == "__main__":
     #groups_flat = groups2files( GROUPS, variant_names, post=".f90" )
     groups_flat = groups2files_cc( GROUPS, all_variant_names, cc_kinds=CC_KINDS, inv_SPECIAL_CC=inv_SPECIAL_CC )
 
-    #print "======= CHECK GROUP FOLDERs "; checkFiles       ( src_path, group_names,                  bRedudant=True, bMissing=True )
-    #print "======= CHECK GROUP FILEs   "; checkFilesInPaths( group_names, groups_flat, pre=src_path, bRedudant=True, bMissing=True )
+    #print "======= CHECK GROUP FOLDERs "; checkFiles       ( src_path_check, group_names,                  bRedudant=True, bMissing=True )
+    #print "======= CHECK GROUP FILEs   "; checkFilesInPaths( group_names, groups_flat, pre=src_path_check, bRedudant=True, bMissing=True )
     
-    print "======= CHECK GROUP FOLDERs "; checkFiles       ( src_path, all_group_names,                  bRedudant=False, bMissing=True )
-    print "======= CHECK GROUP FILEs   "; checkFilesInPaths( all_group_names, groups_flat, pre=src_path, bRedudant=False, bMissing=True )
+    print "======= CHECK GROUP FOLDERs "; checkFiles       ( src_path_check, all_group_names,                  bRedudant=False, bMissing=True )
+    print "======= CHECK GROUP FILEs   "; checkFilesInPaths( all_group_names, groups_flat, pre=src_path_check, bRedudant=False, bMissing=True )
 
     with open("Makefile",'w') as fout:
         
+        #print "DEBUG 1 "
         toMakefile_obj_groups( fout, GROUPS, all_group_names, my_variant_names )
-
+        #print "DEBUG 2 "
         #toMakefile_list_vars( fout, "OBJECTS_SERVER", OBJECTS_SERVER, )
         #toMakefile_list_vars( fout, "OBJECTS",        OBJECTS,        )
-
+        #print "DEBUG 3 "
         toMakefile_list_vars( fout, "OBJECTS", my_group_names )
-
+        #print "DEBUG 4 "
         #fout.write( "(OBJ)/%.o" + "\n\n" )
         fout.write( "F90 = gfortran\n" )
         #toMakefile_name( fout, "FFLAGS",   FFLAGS   )
         #toMakefile_name( fout, "FFLAGS77", FFLAGS   )
         #toMakefile_name( fout, "LFLAGS_",  LFLAGS_  )
-
+        #print "DEBUG 5 "
         toMakefile_name( fout, "FFLAGS",   _FFLAGS[mode_opt] + _FFLAGS['F90']  )
         toMakefile_name( fout, "FFLAGS77", _FFLAGS[mode_opt] + _FFLAGS['F77']  )
         toMakefile_name( fout, "FFLAGSC",  _FFLAGS[mode_opt] + _FFLAGS['CC' ]  )
         toMakefile_name( fout, "LFLAGS_",  LFLAGS_  )
-
+        #print "DEBUG 6 "
         toMakefile_name( fout, "LPATHS",   LPATHS   )
         toMakefile_name( fout, "INCLUDES", INCLUDES )
         #toMakefile_list_vars( fout, "LFLAGS", ["LPATHS","LFLAGS_"] )
-        
+        #print "DEBUG 7 "
         LFLAGS = " -L/home/prokop/intel/mkl/lib/intel64 -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_lapack95_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -L/home/prokop/intel/mkl/intel64 -I/home/prokop/intel/mkl/include/fftw -lfftw3xf_gnu -lm -Bdynamic -L/usr/lib/x86_64-linux-gnu/openmpi/lib -I/usr/lib/x86_64-linux-gnu/openmpi/include -lmpi "
         toMakefile_name( fout, "LFLAGS", LFLAGS )
         #toMakefile_name( fout, "FFLAGS", FFLAGS )
-
+        #print "DEBUG 8 "
         #writeTarget( fout, "fireball.x"       , "$(OBJECTS)", [OBJECTS       ] )
         #writeTarget( fout, "fireball_server.x", "$(OBJECTS)", [OBJECTS_SERVER] )
-
+        #print "DEBUG 9 "
         toMakefile_target( fout, "fireball.x"       , "$(OBJECTS)", "$(OBJECTS)"        )
         #writeTarget( fout, "fireball_server.x", "$(OBJECTS)", "OBJECTS_SERVER" )
-
+        #print "DEBUG 10 "
         for key,body in inline_targets.iteritems() :
             #writeInlineTarget( fout, key, body )
             toMakefile_tar_inline_target( fout, key, body )
-
-        #toMakefile_cc_objs   ( fout, GROUPS, group_names, variant_names, special_cc=SPECIAL_CC, src_path=src_path )
-        toMakefile_cc_objs   ( fout, GROUPS, all_group_names, my_variant_names, src_path=src_path, cc_kinds=CC_KINDS, inv_SPECIAL_CC=inv_SPECIAL_CC )
+        #print "DEBUG 11 "
+        #toMakefile_cc_objs   ( fout, GROUPS, group_names, variant_names, special_cc=SPECIAL_CC, src_path=src_path_make )
+        toMakefile_cc_objs   ( fout, GROUPS, all_group_names, my_variant_names, src_path=src_path_make, cc_kinds=CC_KINDS, inv_SPECIAL_CC=inv_SPECIAL_CC )
+    
+    print " ==== gen_makefile.py DONE ==== "
 
 
 
