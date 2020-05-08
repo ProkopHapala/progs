@@ -145,20 +145,16 @@
        select case (ialgmix)
        case (1)
 !          write(*,501) 'mixing with anderson algorithm'
-          call anderson (Qoutmixer, Qinmixer, bmix, sigma, Kscf, idmix,    &
-               &               imix , max_scf_iterations)
+          call anderson (Qoutmixer, Qinmixer, bmix, sigma, Kscf, idmix, imix , max_scf_iterations)
        case (2)
 !          write(*,501) 'mixing with broyden algorithm'
-          call broyden (Qoutmixer, Qinmixer, bmix, sigma, Kscf, idmix,    &
-               &               imix , max_scf_iterations)
+          call broyden (Qoutmixer, Qinmixer, bmix, sigma, Kscf, idmix, imix , max_scf_iterations)
        case (3)
 !          write(*,501) 'mixing with louie algorithm'
-          call louie (Qoutmixer, Qinmixer, bmix, sigma, Kscf, idmix,    &
-               &               imix , max_scf_iterations)
+          call louie (Qoutmixer, Qinmixer, bmix, sigma, Kscf, idmix, imix , max_scf_iterations)
        case (4)
 !          write(*,501) 'mixing with pulay algorithm'
-          call pulay (Qoutmixer, Qinmixer, bmix, sigma, Kscf, idmix,    &
-               &               imix , max_scf_iterations)
+          call pulay (Qoutmixer, Qinmixer, bmix, sigma, Kscf, idmix, imix , max_scf_iterations)
        end select !ialgmix
 
 

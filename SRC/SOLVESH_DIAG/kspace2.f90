@@ -56,9 +56,7 @@
 !
 ! Program Declaration
 ! ===========================================================================
-        subroutine kspace (nprocs, my_proc, Kscf, iqout, icluster,  &
-     &                     iwrteigen, ikpoint, sks,           &
-     &                     nkpoints, iwrtdos, iwrthop, iwrtatom, itrans, igap)
+        subroutine kspace (nprocs, my_proc, Kscf, iqout, icluster, iwrteigen, ikpoint, sks, nkpoints, iwrtdos, iwrthop, iwrtatom, itrans, igap)
         use configuration
         use density
         use dimensions
@@ -361,20 +359,17 @@
 !!         end if
 
          if (divide) then
-           call zheevd('V', 'U', norbitals, zzzz, norbitals, slam, work,      &
-     &               lwork, rwork , lrwork, iwork, liwork, info )
+           call zheevd('V', 'U', norbitals, zzzz, norbitals, slam, work,  lwork, rwork , lrwork, iwork, liwork, info )
          else
 
 ! first find optimal working space
-           call zheev ('V', 'U', norbitals, zzzz, norbitals, slam, work,      &
-                       -1, rwork, info)
+           call zheev ('V', 'U', norbitals, zzzz, norbitals, slam, work,   -1, rwork, info)
 ! resize working space
            lwork = work(1)
            deallocate (work)
            allocate (work(lwork))
 ! diagonalize the overlap matrix with the new working space
-           call zheev ('V', 'U', norbitals, zzzz, norbitals, slam, work,       &
-     &               lwork, rwork , info)
+           call zheev ('V', 'U', norbitals, zzzz, norbitals, slam, work,  lwork, rwork , info)
          end if
 
          if (info .ne. 0) call diag_error (info, 0)
@@ -462,8 +457,7 @@
           zzzz(:,imu) = zzzz(:,imu)*sqlami
          end do
 
-         call zgemm ('N', 'C', norbitals, norbitals, norbitals_new, a1, zzzz,&
-     &               norbitals, zzzz, norbitals, a0, xxxx, norbitals)
+         call zgemm ('N', 'C', norbitals, norbitals, norbitals_new, a1, zzzz, norbitals, zzzz, norbitals, a0, xxxx, norbitals)
 
 !NPA  now we do X=W(WSW)^-1/2, before X=S^-1/2
          if (iqout .eq. 3) then
@@ -496,28 +490,22 @@
         if (iqout .ne. 3) then
 
 ! Set M=H*(S^-.5)
-         call zhemm ( 'R', 'U', norbitals, norbitals, a1, xxxx, &
-     &               norbitals, yyyy, norbitals, a0, zzzz, norbitals )
+         call zhemm ( 'R', 'U', norbitals, norbitals, a1, xxxx, norbitals, yyyy, norbitals, a0, zzzz, norbitals )
 
 ! Set Z=(S^-.5)*M
-         call zhemm ( 'L', 'U', norbitals, norbitals, a1, xxxx, &
-     &               norbitals, zzzz, norbitals, a0, yyyy, norbitals )
+         call zhemm ( 'L', 'U', norbitals, norbitals, a1, xxxx, norbitals, zzzz, norbitals, a0, yyyy, norbitals )
 
         else
 
 ! FIXME: I think these two calls we don't need them!!
-         call zgemm ('C', 'N', norbitals, norbitals, norbitals, a1, xxxx,&
-     &               norbitals, ssss, norbitals, a0, zzzz, norbitals)
+         call zgemm ('C', 'N', norbitals, norbitals, norbitals, a1, xxxx,  norbitals, ssss, norbitals, a0, zzzz, norbitals)
 
-         call zgemm ('N', 'N', norbitals, norbitals, norbitals, a1, zzzz,&
-     &               norbitals, xxxx, norbitals, a0, zzzz, norbitals)
+         call zgemm ('N', 'N', norbitals, norbitals, norbitals, a1, zzzz,   norbitals, xxxx, norbitals, a0, zzzz, norbitals)
 ! FIXME
 ! Set conjg((W(WSW)^-1/2)T)*H
-         call zgemm ( 'C', 'N', norbitals, norbitals, norbitals, a1, xxxx, &
-     &               norbitals, yyyy, norbitals, a0, zzzz, norbitals )
+         call zgemm ( 'C', 'N', norbitals, norbitals, norbitals, a1, xxxx,  norbitals, yyyy, norbitals, a0, zzzz, norbitals )
 ! Set M*(W(WSW)^-1/2)
-         call zgemm ( 'N', 'N', norbitals, norbitals, norbitals, a1, zzzz, &
-     &               norbitals, xxxx, norbitals, a0, yyyy, norbitals )
+         call zgemm ( 'N', 'N', norbitals, norbitals, norbitals, a1, zzzz,  norbitals, xxxx, norbitals, a0, yyyy, norbitals )
 
 ! so we have conjg((W(WSW)^-1/2)T)*H*(W(WSW)^-1/2) now
 
@@ -586,24 +574,21 @@
  
 ! Eigenvectors are needed to calculate the charges and for forces!
         if (divide) then
-          call zheevd('V', 'U', norbitals, yyyy, norbitals, eigen, work,       &
-     &                 lwork, rwork , lrwork, iwork, liwork, info )
+          call zheevd('V', 'U', norbitals, yyyy, norbitals, eigen, work,  lwork, rwork , lrwork, iwork, liwork, info )
         else
 ! set default size of working space
           lwork = 1
           deallocate (work)
           allocate (work(lwork))
 ! first find optimal working space
-          call zheev ('V', 'U', norbitals, yyyy, norbitals, eigen, work,      &
-     &                 -1, rwork, info)
+          call zheev ('V', 'U', norbitals, yyyy, norbitals, eigen, work,  -1, rwork, info)
 ! resize working space
           lwork = work(1)
 !          write (*,*) 'lwork =',lwork
           deallocate (work)
           allocate (work(lwork))
 ! diagonalize the overlap matrix with the new working space
-          call zheev ('V', 'U', norbitals, yyyy, norbitals, eigen, work,       &
-     &                lwork, rwork, info)
+          call zheev ('V', 'U', norbitals, yyyy, norbitals, eigen, work,  lwork, rwork, info)
         end if
         if (info .ne. 0) call diag_error (info, 0)
 
@@ -626,16 +611,13 @@
 ! yyyy = Hamiltonian eigenvectors in the MO basis
         eigen_k(1:norbitals,ikpoint) = eigen(:)
         if (iqout .ne. 2) blowre(:,:,ikpoint) = real(yyyy(:,:))
-        if (iqout .ne. 2 .and. icluster .ne. 1)                              &
-     &   blowim(:,:,ikpoint) = aimag(yyyy(:,:))
+        if (iqout .ne. 2 .and. icluster .ne. 1) blowim(:,:,ikpoint) = aimag(yyyy(:,:))
 
         if (iqout .ne. 3) then
-         call zhemm ( 'L', 'U', norbitals, norbitals, a1, xxxx, &
-     &               norbitals, yyyy, norbitals, a0, zzzz, norbitals )
+         call zhemm ( 'L', 'U', norbitals, norbitals, a1, xxxx,  norbitals, yyyy, norbitals, a0, zzzz, norbitals )
 !NPA
         else
-         call zgemm ( 'N', 'N', norbitals, norbitals, norbitals, a1, xxxx,   &
-     &               norbitals, yyyy, norbitals, a0, zzzz, norbitals )
+         call zgemm ( 'N', 'N', norbitals, norbitals, norbitals, a1, xxxx, norbitals, yyyy, norbitals, a0, zzzz, norbitals )
         end if
 
         bbnkre(:,:,ikpoint) = real(zzzz(:,:))

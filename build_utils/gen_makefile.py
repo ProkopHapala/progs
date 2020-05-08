@@ -334,7 +334,7 @@ if __name__ == "__main__":
     #variant_names_ = ['','DOUBLE','MPI-k','QMMM','ORDERN']
     #variant_names_ = ['','DOUBLE','MPI-k','QMMM','ORDERN']
 
-    my_group_names = select_obj_groups( GROUPS, all_group_names, my_variant_names_set )
+    my_group_names = select_obj_groups( GROUPS, base_group_names, my_variant_names_set )
     print " === my_group_names ", my_group_names
     #exit(-1)
 
@@ -380,12 +380,17 @@ if __name__ == "__main__":
         #writeTarget( fout, "fireball.x"       , "$(OBJECTS)", [OBJECTS       ] )
         #writeTarget( fout, "fireball_server.x", "$(OBJECTS)", [OBJECTS_SERVER] )
         #print "DEBUG 9 "
-        toMakefile_target( fout, "fireball.x"       , "$(OBJECTS)", "$(OBJECTS)"        )
-        #writeTarget( fout, "fireball_server.x", "$(OBJECTS)", "OBJECTS_SERVER" )
-        #print "DEBUG 10 "
+
         for key,body in inline_targets.iteritems() :
             #writeInlineTarget( fout, key, body )
+            print key,body
             toMakefile_tar_inline_target( fout, key, body )
+
+        #print "DEBUG 10 "
+        toMakefile_target( fout, "fireball.x"       , "$(OBJECTS) fireball.o",       "$(OBJECTS) fireball.o" )
+        toMakefile_target( fout, "fireball_debug.x" , "$(OBJECTS) fireball_debug.o", "$(OBJECTS) fireball_debug.o" )
+        #writeTarget( fout, "fireball_server.x", "$(OBJECTS)", "OBJECTS_SERVER" )
+
         #print "DEBUG 11 "
         #toMakefile_cc_objs   ( fout, GROUPS, group_names, variant_names, special_cc=SPECIAL_CC, src_path=src_path_make )
         toMakefile_cc_objs   ( fout, GROUPS, all_group_names, my_variant_names, src_path=src_path_make, cc_kinds=CC_KINDS, inv_SPECIAL_CC=inv_SPECIAL_CC )

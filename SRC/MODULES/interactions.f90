@@ -134,7 +134,7 @@
          real, dimension (:, :, :, :), allocatable :: vxc_ca
          real, dimension (:, :, :, :), allocatable :: ewaldqmmm
 ! Dipole with XYZ components
-         real, dimension (:, :, :), allocatable :: dipcm
+         real, dimension (:, :, :),       allocatable :: dipcm
          real, dimension (:, :, :, :, :), allocatable :: dipc
 
 ! These arrays store interactions which are needed for the extended-Hubbard

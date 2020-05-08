@@ -12,8 +12,9 @@ cd    build
 ln -s ../Makefile      || true
 #make | tee make.log
 rm make.log                        || true
-echo "==== START make "
 pwd
-make 2>&1 | tee -a make.log
+echo "==== START make "
+make $1 2>&1 | tee -a make.log
+echo "==== END   make "
 cd $dr
 ln -s build/make.log .             || true
