@@ -177,19 +177,19 @@ OBJECTS =  $(MODULES)  $(FORM_RHO)  $(UTIL)  $(SOLVESH_DIAG)  $(DASSEMBLERS)  $(
 	 $(THERMOINT)  $(UMBRELLA)  $(XC)  $(CG)  $(DOS)  $(NEB)  $(TDSE)  $(TRANS)  $(BIAS)  $(NAC)  $(QMMM)  $(DFTD3)  $(VISUALIZATION) 
 
 F90 = gfortran
-FFLAGS =  -Og -g -fbounds-check -Wall -Wno-tabs -freal-4-real-8 -ffree-form -ffree-line-length-none 
+FFLAGS =  -Og -g -fbounds-check -Wall -Wno-tabs -Wno-unused-variable -freal-4-real-8 -ffree-form -ffree-line-length-none 
 
-FFLAGS77 =  -Og -g -fbounds-check -Wall -Wno-tabs -freal-4-real-8 
+FFLAGS77 =  -Og -g -fbounds-check -Wall -Wno-tabs -Wno-unused-variable -freal-4-real-8 
 
-FFLAGSC =  -Og -g -fbounds-check -Wall -Wno-tabs -freal-4-real-8 -ffree-form -ffree-line-length-none 
+FFLAGSC =  -Og -g -fbounds-check -Wall -Wno-tabs -Wno-unused-variable -freal-4-real-8 -ffree-form -ffree-line-length-none 
 
 LFLAGS_ =  -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_lapack95_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -lfftw3xf_gnu -lm -Bdynamic -lmpi 
 
-LPATHS =  -L/home/prokop/intel/mkl/lib/intel64 -L/home/prokop/intel/mkl/lib/intel64 -I/home/prokop/intel/mkl/include/fftw -L/usr/lib/x86_64-linux-gnu/openmpi/lib -I/usr/lib/x86_64-linux-gnu/openmpi/include 
+LPATHS =  -L/home/prokop/SW/intel/mkl/lib/intel64 -L/home/prokop/SW/intel/mkl/lib/intel64 -I/home/prokop/SW/intel/mkl/include/fftw -L/usr/lib/x86_64-linux-gnu/openmpi/lib -I/usr/lib/x86_64-linux-gnu/openmpi/include 
 
 INCLUDES = -I/usr/include/mpich/
 
-LFLAGS =  -L/home/prokop/intel/mkl/lib/intel64 -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_lapack95_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -L/home/prokop/intel/mkl/intel64 -I/home/prokop/intel/mkl/include/fftw -lfftw3xf_gnu -lm -Bdynamic -L/usr/lib/x86_64-linux-gnu/openmpi/lib -I/usr/lib/x86_64-linux-gnu/openmpi/include -lmpi 
+LFLAGS =  -L/home/prokop/SW/intel/mkl/lib/intel64 -L/home/prokop/SW/intel/mkl/lib/intel64 -I/home/prokop/SW/intel/mkl/include/fftw -L/usr/lib/x86_64-linux-gnu/openmpi/lib -I/usr/lib/x86_64-linux-gnu/openmpi/include  -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_lapack95_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -lfftw3xf_gnu -lm -Bdynamic -lmpi 
 
 fireball.x : $(OBJECTS)
 	$(F90) -o fireball.x  $(FFLAGS) $(OBJECTS) $(LFLAGS)

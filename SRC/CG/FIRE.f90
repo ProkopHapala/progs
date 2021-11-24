@@ -225,7 +225,8 @@ subroutine FIRE_loop_ex(nsteps,act_iter)
     write (*, *) '++  ======================================================= '
     write (*, *) '++   '
     eOld = 100.0
-    call getEF(ecurrent, f)
+    !call getEF(ecurrent, f)
+    call getEF(ecurrent)
     eMin = etot
     ndownhillsteps = 0
 

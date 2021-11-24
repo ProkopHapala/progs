@@ -1,7 +1,12 @@
 #!/usr/bin/python
 
+
+
 import sys
 import os
+
+
+sys.dont_write_bytecode = True
 
 CC_KINDS={
 'F90': ( '', '.f90', '$(FFLAGS)',   '$(INCLUDES)', '$(F90)' ),
@@ -281,8 +286,8 @@ if __name__ == "__main__":
         toPython_groups( fout, groups, var_names )
     '''
 
-    fomatLinkLog( "link_ref.log", "link_ref.log" )
-    fomatLinkLog( "link.log", "link.log" )
+    #fomatLinkLog( "link_ref.log", "link_ref.log" )
+    #fomatLinkLog( "link.log", "link.log" )
 
     import Makefile_targets
     import Makefile_machines
@@ -309,8 +314,8 @@ if __name__ == "__main__":
 
     #build_path = "build/"
     src_path = "../SRC/"
-    #MKL_PATH = "/home/prokop/SW/intel"
-    MKL_PATH = "/home/prokop/intel"
+    MKL_PATH = "/home/prokop/SW/intel"
+    #MKL_PATH = "/home/prokop/intel"
     MPI_PATH = "/usr/lib/x86_64-linux-gnu/openmpi"
     #FFLAGS, LFLAGS_, LPATHS = genFlags( ["OPT"], MKL_PATH=MKL_PATH, MPI_PATH=MPI_PATH )
     LFLAGS_, LPATHS   = genLFLAGS( MKL_PATH=MKL_PATH, MPI_PATH=MPI_PATH )
@@ -370,7 +375,10 @@ if __name__ == "__main__":
         toMakefile_name( fout, "INCLUDES", INCLUDES )
         #toMakefile_list_vars( fout, "LFLAGS", ["LPATHS","LFLAGS_"] )
         
-        LFLAGS = " -L/home/prokop/intel/mkl/lib/intel64 -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_lapack95_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -L/home/prokop/intel/mkl/intel64 -I/home/prokop/intel/mkl/include/fftw -lfftw3xf_gnu -lm -Bdynamic -L/usr/lib/x86_64-linux-gnu/openmpi/lib -I/usr/lib/x86_64-linux-gnu/openmpi/include -lmpi "
+        #LFLAGS = " -L/home/prokop/intel/mkl/lib/intel64 -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_lapack95_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -L/home/prokop/intel/mkl/intel64 -I/home/prokop/intel/mkl/include/fftw -lfftw3xf_gnu -lm -Bdynamic -L/usr/lib/x86_64-linux-gnu/openmpi/lib -I/usr/lib/x86_64-linux-gnu/openmpi/include -lmpi "
+        LFLAGS=LPATHS+LFLAGS_
+        print "#### LFLAGS: "
+        print LFLAGS
         toMakefile_name( fout, "LFLAGS", LFLAGS )
         #toMakefile_name( fout, "FFLAGS", FFLAGS )
 

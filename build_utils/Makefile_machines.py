@@ -1,4 +1,5 @@
 
+#MKL_PATH = "/home/prokop/SW/intel"
 MKL_PATH = "/home/prokop/SW/intel"
 MPI_PATH = "/usr/lib/x86_64-linux-gnu/openmpi"
 
@@ -11,8 +12,8 @@ def genLFLAGS( MKL_PATH=MKL_PATH, MPI_PATH=MPI_PATH ):
         "PATH_MPI_LIB"   : MPI_PATH+"/lib",
         "PATH_MPI_INC"   : MPI_PATH+"/include",
     }
-    #print path_dict
-     
+    for k,v in path_dict.iteritems(): print k,v
+
     LFLAGS   = " -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_lapack95_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -lfftw3xf_gnu -lm -Bdynamic -lmpi "
     #LPATHS  = "-L$(PATH_MKL) -L$(PATH_FFTW_LIB) -I$(PATH_FFTW_INCL) -L$(PATH_MPI_LIB) -I$(PATH_MPI_INC)"
     LPATHS   = " -L{PATH_MKL} -L{PATH_FFTW_LIB} -I{PATH_FFTW_INCL} -L{PATH_MPI_LIB} -I{PATH_MPI_INC} ".format(**path_dict)
@@ -30,7 +31,8 @@ _FFLAGS = {
     'CC'       : " -freal-4-real-8 -ffree-form -ffree-line-length-none ",
     'OPT'      : " -O3 -mtune=native -ftree-vectorize ",
     'VERY_OPT' : " -Ofast -march=native -mtune=native ",
-    'DEBUG'    : " -Og -g -fbounds-check -Wall -Wno-tabs",
+    'DEBUGbak'    : " -Og -g -fbounds-check -Wall -Wno-tabs",
+    'DEBUG'    : " -Og -g -fbounds-check -Wall -Wno-tabs -Wno-unused-variable -Wno-unused-label",
     'DEBUGw'   : " -Og -g -fbounds-check ",
 }
 

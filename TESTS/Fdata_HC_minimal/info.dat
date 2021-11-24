@@ -1,0 +1,38 @@
+   dani                                                                 
+           2  - Number of species 
+======================================================================
+   1          - Information for this species 
+  H           - Element 
+    1         - Nuclear Z 
+    1.008     - Atomic Mass 
+   1          - Number of shells; L for each shell 
+    0
+   1          - Number of shells; L for each shell  (Pseudopotential) 
+    0
+   0.20 - Radial cutoffs PP 
+   1.00
+   4.50
+  cinput/001_450.wf1       
+  cinput/001_450.na0         cinput/001_450.na1       
+     -11.72347   - Atomic energy 
+======================================================================
+======================================================================
+   2          - Information for this species 
+  C           - Element 
+    6         - Nuclear Z 
+   12.011     - Atomic Mass 
+   2          - Number of shells; L for each shell 
+    0  1
+   2          - Number of shells; L for each shell  (Pseudopotential) 
+    0  1
+   0.95 - Radial cutoffs PP 
+   1.00   3.00
+   4.50   4.50
+  cinput/006_450.wf1         cinput/006_450.wf2       
+  cinput/006_450.na0         cinput/006_450.na1         cinput/006_450.na2       
+       0.00000   - Atomic energy 
+======================================================================
+ No time available!                          
+ ( 1,  1,  1,  0,  0,  0,  1)
+ ( 0,  4,
+ ( 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  1,  1,  1,  0,  0,  0,  0) 

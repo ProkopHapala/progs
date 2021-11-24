@@ -1,34 +1,13 @@
 #!/bin/bash
 
-rm -r Fdata_*
-cd distorted_benzene
+names="t01_H2 t02_CH4 t03_C2H2 t04_C2H4 t05_C2H6 t06_C6H6 t07_Cn t08_CnHn"
 
-rm  Fdata fireball.in CHARGES NEIGHBORS* Atomo_* answer* modes.xyz struc.inp \
-         *.out *.xsf *.dat
+bkdir=`pwd`
 
-cd ../benzene_on_grid/
-
-rm  Fdata fireball.in CHARGES NEIGHBORS* Atomo_* answer* modes.xyz struc.inp \
-         *.out *.xsf *.dat
-
-cd ../graphene_2x2/
-
-rm  Fdata fireball.in CHARGES NEIGHBORS* Atomo_* answer* modes.xyz struc.inp \
-         *.out *.xsf *.dat
-
-cd ../graphene_grid/
-
-rm  Fdata fireball.in CHARGES NEIGHBORS* Atomo_* answer* modes.xyz struc.inp \
-         *.out *.xsf *.dat
-
-#rm Fdata
-#rm fireball.in
-#rm CHARGES
-#rm NEIGHBORS*
-#rm *.out
-#rm *.xsf
-#rm Atomo_*
-#rm *.dat
-#rm answer*
-#rm modes.xyz
-#rm struc.inp
+for d in $names; do
+    echo $d
+    cd $d
+    rm CHARGES param.dat answer.* *.out
+    rm cel_.lvs answer-image.*
+    cd $bkdir
+done
