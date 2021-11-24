@@ -277,8 +277,7 @@
            filename = append_string (filename, extension)
 !           if (isorp .eq. initype) write (*,'('' Opening data file: '',a100)') filename
            open (unit = iounit, file = filename, status = 'old')
-           call readheader_2c (interaction, iounit, nsh_max, numz, rc1, rc2, &
-     &                         zmin, zmax, npseudo, cl_pseudo)
+           call readheader_2c (interaction, iounit, nsh_max, numz, rc1, rc2, zmin, zmax, npseudo, cl_pseudo)
            if (numz .gt. nfofx) then
             write (*,*) ' numz = ', numz, ' in read_2c.f90'
             write (*,*) ' nfofx = ',nfofx
@@ -295,6 +294,7 @@
  
 ! Here are the data file characteristics: number of points and the grid range
            itype = ind2c(interaction,isorp)
+           !write (*,*) "DEBUG read_2c.f90 z2cmax", itype,in1,in2
            z2cmax(itype,in1,in2) = zmax
            numz2c(itype,in1,in2) = numz
  

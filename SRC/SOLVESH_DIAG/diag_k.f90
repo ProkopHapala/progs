@@ -109,11 +109,9 @@
           write (*,*) ' save eigenstuff '
         else
          if (iqout .ne. 2) allocate (blowre (norbitals, norbitals, nkpoints))
-         if (iqout .ne. 2 .and. icluster .ne. 1)                           &
-     &      allocate (blowim (norbitals, norbitals, nkpoints))
+         if (iqout .ne. 2 .and. icluster .ne. 1) allocate (blowim (norbitals, norbitals, nkpoints))
          allocate (bbnkre (norbitals, norbitals, nkpoints))
-         if (icluster .ne. 1)                                              &
-     &      allocate (bbnkim (norbitals, norbitals, nkpoints))
+         if (icluster .ne. 1) allocate (bbnkim (norbitals, norbitals, nkpoints))
          allocate (eigen_k (norbitals, nkpoints))
         endif
 
@@ -157,8 +155,7 @@
 !         if (iPRESSURE .eq. 1) write (18,*) nkpoints
           if (iwrteigen .eq. 1) write (19,*) nkpoints, norbitals_new
          end if
-!        if (iPRESSURE .eq. 1)                                            &
-!    &       write (18,100) special_k(:,ikpoint), weight_k(ikpoint)
+!        if (iPRESSURE .eq. 1)  write (18,100) special_k(:,ikpoint), weight_k(ikpoint)
 
          if (iwrteigen .eq. 1) then
            write (19,*) ' ------ the energy eigenvalues ----'

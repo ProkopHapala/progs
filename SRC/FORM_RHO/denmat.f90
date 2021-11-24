@@ -53,8 +53,7 @@
 !
 ! Program Declaration
 ! ===========================================================================
-        subroutine denmat (ifixcharge, iqout, icluster, iwrtefermi, tempfe,  &
-        &                  ebs, iwrtpop, bmix, Kscf, igap)
+        subroutine denmat (ifixcharge, iqout, icluster, iwrtefermi, tempfe, ebs, iwrtpop, bmix, Kscf, igap)
         use charges
         use configuration
         use constants_fireball

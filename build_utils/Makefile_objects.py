@@ -9,9 +9,11 @@ SPECIAL_CC={
 
 # =================== GROUPS (MODULES) AND OPTIONS (VARIANTS)
 
-all_group_names = ['MODULES', 'FORM_RHO','UTIL','SOLVESH_DIAG','SOLVESH_ORDERN','DASSEMBLERS','INTERACTIONS','UTIL_SPARSE','ALLOCATIONS','ASSEMBLERS',
-        'GRID','INITIALIZERS','INTERPOLATERS','LOOPS','MAIN','MD','NEIGHBORS','PRESSURE',
+base_group_names = ['MODULES', 'FORM_RHO','UTIL','SOLVESH_DIAG','SOLVESH_ORDERN','DASSEMBLERS','INTERACTIONS','UTIL_SPARSE','ALLOCATIONS','ASSEMBLERS',
+        'GRID','INITIALIZERS','INTERPOLATERS','LOOPS','MD','NEIGHBORS','PRESSURE',
         'READFILES','ROTATIONS','THERMOINT','SOCKETS','UMBRELLA','XC','CG','DOS','NEB','TDSE','TRANS','BIAS','NAC','QMMM','DFTD3','VISUALIZATION']
+
+all_group_names = base_group_names + ['MAIN']
 
 #variant_names = ['','SCALAPACK','OPENMP','ORDERN','LAPACK95','DOUBLE','GAMMA','MPI-k',    'QMMM', 'SERVER', ]
 
@@ -237,7 +239,7 @@ GROUPS = {
 
 
 'MAIN' : {
-'PROGRAM' : ['fireball'],
+'PROGRAM' : ['fireball','fireball_debug'],
 'SERVER'  : ['fireball_server','fireball_server_amber']
 }, #END MAIN
 

@@ -32,7 +32,7 @@ _FFLAGS = {
     'OPT'      : " -O3 -mtune=native -ftree-vectorize ",
     'VERY_OPT' : " -Ofast -march=native -mtune=native ",
     'DEBUGbak'    : " -Og -g -fbounds-check -Wall -Wno-tabs",
-    'DEBUG'    : " -Og -g -fbounds-check -Wall -Wno-tabs -Wno-unused-variable -Wno-unused-label",
+    'DEBUG'    : " -Og -g -fbounds-check -Wall -Wno-tabs -Wno-unused-variable -Wno-unused-label -Wno-missing-include-dirs",
     'DEBUGw'   : " -Og -g -fbounds-check ",
 }
 
