@@ -3,9 +3,11 @@
 set -e   # stop on error  ; see  https://stackoverflow.com/questions/3474526/stop-on-first-error
 
 dr=`pwd`
-python build_utils/gen_makefile.py
+cd build_utils
+python gen_makefile.py
+#python build_utils/gen_makefile.py
 #ln -s Makefile ../build/Makefile
-
+cd $dr
 
 mkdir build  || true
 cd    build
