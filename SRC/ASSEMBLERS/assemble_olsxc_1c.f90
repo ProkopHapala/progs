@@ -54,6 +54,7 @@
 ! Program Declaration
 ! ===========================================================================
         subroutine assemble_olsxc_1c (natoms, itheory, iforce)
+        use debug
         use charges
         use dimensions
         use interactions
@@ -85,7 +86,10 @@
         real exc_1c
         real muexc_1c
         real, dimension (numorb_max,numorb_max) :: mu1xc
- 
+
+!write(*,*) "DEBUG assemble_olsxc_1c()"
+!call debug_writeArray_1i( "neigh_self", neigh_self, natoms )
+
 ! Procedure
 ! ===========================================================================
 ! Initialize

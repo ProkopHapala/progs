@@ -55,6 +55,7 @@
 ! Program Declaration
 ! ===========================================================================
         subroutine average_ca_rho (nprocs, Kscf, iforce, iordern, igauss)
+        !use options
         use charges
         use configuration
         use density

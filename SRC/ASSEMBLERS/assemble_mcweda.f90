@@ -47,7 +47,7 @@
 ! Program Declaration
 ! ===========================================================================
         subroutine assemble_mcweda ()
-
+        use debug
         use options
         use outputs
         use mpi_main
@@ -97,16 +97,12 @@
 ! neighn(iatom) = # of neighbors of iatom
 ! neighj(iatom,ineigh) = j-sub-m, the jatom value of the ineigh'th neighbor.
 ! neighb(iatom,ineigh) = beta-sub-m, the beta value for the ineigh'th neighbor.
+
           if (Kscf .eq. 1) then
            if (ifixneigh .eq. 0) then
-            call reallocate_neigh (nprocs, my_proc, iordern,         &
-     &                             itheory, itheory_xc, igauss, icluster,    &
-     &                             ivdw, iwrthampiece,       &
-     &                             iwrtatom, igrid)
-            call neighbors (nprocs, my_proc, iordern, icluster,      &
-     &                      iwrtneigh, ivdw)
-            call neighborsPP (nprocs, my_proc, iordern, icluster,    &
-     &                        iwrtneigh)
+            call reallocate_neigh (nprocs, my_proc, iordern, itheory, itheory_xc, igauss, icluster,  ivdw, iwrthampiece,  iwrtatom, igrid)
+            call neighbors (nprocs, my_proc, iordern, icluster,  iwrtneigh, ivdw)
+            call neighborsPP (nprocs, my_proc, iordern, icluster,  iwrtneigh)
             call num_neigh_tot (numorb_max)
 ! bias voltage option
              if (ibias .eq. 1) then
@@ -115,18 +111,18 @@
            else
             !write (*,*) ' Using neighbor map from NEIGHBORS file. '
             call initneighbors (natoms, ivdw, nstepi)
-
             call num_neigh_tot (numorb_max)
-           end if
+           end if !  (ifixneigh .eq. 0) 
            call backnay ()
-            !SFIRE
-            call neighbors_pairs(icluster)
-            !SFIRE
+           !SFIRE
+           call neighbors_pairs(icluster)
+           !SFIRE
            call common_neighbors (nprocs, my_proc, iordern, iwrtneigh_com)
-           call common_neighborsPP (nprocs, my_proc, iordern,        &
-     &                              iwrtneigh_com, icluster)
+           call common_neighborsPP (nprocs, my_proc, iordern, iwrtneigh_com, icluster)
           end if ! end if (Kscf .eq. 1)
 
+          !write(*,*) "DEBUG 1 "
+          !call debug_writeArray_1i( "neigh_self", neigh_self, natoms )
 
 ! ===========================================================================
 !                              ewald energy
@@ -136,6 +132,9 @@
            call get_ewald (nprocs, my_proc, kforce, icluster,        &
      &                     itheory, iordern)
           end if
+
+          !write(*,*) "DEBUG 2 "
+          !call debug_writeArray_1i( "neigh_self", neigh_self, natoms )
 
 ! ===========================================================================
 ! ---------------------------------------------------------------------------
@@ -180,6 +179,9 @@
             end do
            end do
           end if
+
+          !write(*,*) "DEBUG 3 "
+          !call debug_writeArray_1i( "neigh_self", neigh_self, natoms )
 ! ===========================================================================
 !                               assemble_1c
 ! ===========================================================================

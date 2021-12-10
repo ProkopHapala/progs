@@ -53,8 +53,7 @@
 !
 ! Program Declaration
 ! ===========================================================================
-        subroutine readheader_2c (interaction, iounit, nsh_max, numz, rc1,   &
-     &                            rc2, zmin, zmax, npseudo, cl_pseudo)
+        subroutine readheader_2c (interaction, iounit, nsh_max, numz, rc1, rc2, zmin, zmax, npseudo, cl_pseudo)
         implicit none
  
 ! Argument Declaration and Description
@@ -89,6 +88,7 @@
  
 ! Procedure
 ! ===========================================================================
+
         do iline = 1, 9
          read (iounit,100) message
         end do

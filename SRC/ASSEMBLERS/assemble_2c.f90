@@ -61,6 +61,8 @@
         use interactions
         use neighbor_map
         use options, only: idipole, itheory_xc
+
+        use debug
         implicit none
  
 ! Argument Declaration and Description
@@ -206,16 +208,18 @@
 ! derivatives are computed only if iforce = 1 !
 ! For these interactions, there are no subtypes and isorp = 0
           isorp = 0
-          interaction = 1
+          interaction = 1 ! Overlap
           in3 = in2
-          call doscentros (interaction, isorp, iforce, in1, in2, in3, y,&
-     &                     eps, deps, sx, spx)
+          call doscentros (interaction, isorp, iforce, in1, in2, in3, y, eps, deps, sx, spx)
  
+          !call debug_writeIntegralSet( "intS.log", interaction, isorp, in1, in2 )
+          !write(*,*) "DEBUG stop in assemble_2c.()"
+          !stop ! DEBUG
+
           isorp = 0
-          interaction = 13
+          interaction = 13  ! Kinetic
           in3 = in2
-          call doscentros (interaction, isorp, iforce, in1, in2, in3, y,&
-     &                     eps, deps, tx, tpx)
+          call doscentros (interaction, isorp, iforce, in1, in2, in3, y, eps, deps, tx, tpx)
  
 ! Write s and t to appropriate arrays
           do inu = 1, num_orb(in2)

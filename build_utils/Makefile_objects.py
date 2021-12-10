@@ -95,6 +95,7 @@ GROUPS = {
 'fb_socket',
 'sockets',
 'classicMD',
+'debug',
 ],
 'MPI-k' : ['mpi_declarations'],
 'ORDERN': ['ordern'],

@@ -90,6 +90,8 @@
         integer neigh_max_vdw_old
         integer neighPP_max_old
 
+        write (*,*) "DEBUG reallocate_neigh() "
+        
 ! Procedure
 ! ===========================================================================
         neigh_max_old = neigh_max
