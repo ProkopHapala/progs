@@ -185,8 +185,6 @@
         if (interaction .eq. 6) isub2c = 4
         if (interaction .eq. 7) isub2c = 4
         if (interaction .eq. 8) isub2c = 4
- 
-        write(*,*) "DEBUG read_2c(interaction, nspecies, itheory, ioff2c, nzx) ", interaction, nspecies, itheory, ioff2c, nzx
         
 ! Allocate and initialize arrays
         if(interaction .eq. 1) then
@@ -202,9 +200,6 @@
          end if
         end if
         iounit = 71
-
-        !write (*,*) "DEBUG read_2c.f90 shape(z2cmax)", shape(z2cmax)
-
 
 ! Here are the roots for the file names for all interactions
         if (interaction .eq. 1)  root = trim(fdataLocation)//'/overlap'
@@ -299,7 +294,6 @@
  
 ! Here are the data file characteristics: number of points and the grid range
            itype = ind2c(interaction,isorp)
-           !write (*,*) "DEBUG read_2c.f90 ind2c(interaction,isorp)", interaction,isorp, "->", itype
            z2cmax(itype,in1,in2) = zmax
            numz2c(itype,in1,in2) = numz
  

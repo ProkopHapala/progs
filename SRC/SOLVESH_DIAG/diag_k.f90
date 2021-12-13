@@ -89,10 +89,10 @@
 ! Procedure
 ! ===========================================================================
 
-        call debug_writeBlockedMat( "S_mat.log", s_mat )
-        call debug_writeBlockedMat( "H_mat.log", h_mat )
-        write (*,*) "DEBUG STOP in diag_k()"
-        stop  ! DEBUG
+        !call debug_writeBlockedMat( "S_mat.log", s_mat )
+        !call debug_writeBlockedMat( "H_mat.log", h_mat )
+        !write (*,*) "DEBUG STOP in diag_k()"
+        !stop  ! DEBUG
 
 ! Now we have the real space hamiltonian and overlap. Compute the k-space
 ! Hamiltonian and overlap and diagonalize. First put the k-points into the
