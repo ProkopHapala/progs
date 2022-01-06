@@ -53,8 +53,7 @@
 !
 ! Program Declaration
 ! ===========================================================================
-  subroutine anderson(x_try, x_old, beta, r2, iter, max_order, nmsh,      &
-     &                max_scf_iterations)
+  subroutine anderson(x_try, x_old, beta, r2, iter, max_order, nmsh,  max_scf_iterations)
 
 
       use charges
@@ -101,6 +100,7 @@
       integer info
  
 ! Procedure
+
 ! ===========================================================================
       if(.not. allocated(F))then
          allocate(F(nmsh,max_scf_iterations))

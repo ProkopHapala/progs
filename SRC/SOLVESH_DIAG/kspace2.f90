@@ -57,6 +57,7 @@
 ! Program Declaration
 ! ===========================================================================
         subroutine kspace (nprocs, my_proc, Kscf, iqout, icluster, iwrteigen, ikpoint, sks, nkpoints, iwrtdos, iwrthop, iwrtatom, itrans, igap)
+        use debug
         use configuration
         use density
         use dimensions
@@ -112,6 +113,8 @@
         integer lm
         integer issh
 
+        integer ifile
+
         real dot
         real*8 sqlami
 
@@ -131,12 +134,12 @@
         complex*16, dimension (:, :, :), allocatable, save :: sm12_save
 !NPA
         complex*16, dimension (:, :), allocatable :: ssss
-        real*8, dimension (:), allocatable :: ww
+        real*8,     dimension (:),    allocatable :: ww
 
 ! work vector for cheev/cheevd
-        complex*16, allocatable, dimension (:) :: work
-        real*8, allocatable, dimension (:) :: rwork
-        integer, allocatable, dimension (:) :: iwork
+        complex*16, allocatable, dimension (:) ::  work
+        real*8,     allocatable, dimension (:) :: rwork
+        integer,    allocatable, dimension (:) :: iwork
         integer lwork, lrwork, liwork
         logical, parameter :: divide = .false.  ! do we divide and conquer?
 
@@ -174,7 +177,7 @@
         endif
 
         if (divide) then
-          lwork = 100*norbitals + norbitals*norbitals
+          lwork  = 100*norbitals + norbitals*norbitals
           lrwork = 100*norbitals + 3*norbitals*norbitals ! for old versions of cheevd
           liwork = 10*norbitals
           allocate (work(lwork))
@@ -361,7 +364,6 @@
          if (divide) then
            call zheevd('V', 'U', norbitals, zzzz, norbitals, slam, work,  lwork, rwork , lrwork, iwork, liwork, info )
          else
-
 ! first find optimal working space
            call zheev ('V', 'U', norbitals, zzzz, norbitals, slam, work,   -1, rwork, info)
 ! resize working space
@@ -371,9 +373,7 @@
 ! diagonalize the overlap matrix with the new working space
            call zheev ('V', 'U', norbitals, zzzz, norbitals, slam, work,  lwork, rwork , info)
          end if
-
          if (info .ne. 0) call diag_error (info, 0)
-
          if (ishort .eq. 1 .and. wrtout) then
 !          write (*,100) slam(1), slam(norbitals)
          else if (wrtout) then
@@ -443,7 +443,6 @@
           end do
          end if
 
-!
 ! CALCULATE (S^-1/2) --> sm1
 ! ****************************************************************************
 ! In a diagonal reperesentation (Udagger*S*U = s, s is a diagonal matrix)
@@ -456,16 +455,13 @@
           sqlami = slam(imu)**(-0.25d0)
           zzzz(:,imu) = zzzz(:,imu)*sqlami
          end do
-
          call zgemm ('N', 'C', norbitals, norbitals, norbitals_new, a1, zzzz, norbitals, zzzz, norbitals, a0, xxxx, norbitals)
-
 !NPA  now we do X=W(WSW)^-1/2, before X=S^-1/2
          if (iqout .eq. 3) then
           do imu=1, norbitals
            xxxx(imu,:)=xxxx(imu,:)*ww(imu)
           end do
          endif
-
 ! Now put S^-1/2 into s(k)^-1/2, this will be remembered for the duration of
 ! the scf cycle.
          do inu = 1, norbitals
@@ -473,9 +469,7 @@
            sm12_save(imu,inu,ikpoint) = xxxx(imu,inu)
           end do
          end do
-
         else ! (if Kscf .eq. 1 .and iqout .ne. 3)
-
 ! Now if not first iteration
 ! Restore S^-1/2 from s(k)^-1/2,
          xxxx(:,:) = sm12_save(:,:,ikpoint)
@@ -485,31 +479,43 @@
 ! zzzz = Unused (used as temporary work area below)
 ! yyyy = Hamiltonian in AO basis
 
+        !zzzz(jmu,jnu) = zzzz(jmu,jnu) + phase*s_mat(imu,inu,ineigh,iatom)
+        !yyyy(jmu,jnu) = yyyy(jmu,jnu) + phase*h_mat(imu,inu,ineigh,iatom)
+
+
+
 ! CALCULATE (S^-1/2)*H*(S^-1/2)
 ! ****************************************************************************
+        ifile = 111111
+        write(*,*) " norbitals ", norbitals, " lwork ",lwork, " lrwork ",lrwork, " liwork ",liwork
+        open( ifile, file='solveH_mats.log', status='unknown' )
+        !call debug_writeMatFile( "sqrtS.log", real(xxxx), norbitals, norbitals )
+        !call debug_writeMatFile( "Hk.log",    real(yyyy),   norbitals, norbitals )
+        write(ifile,*) "sqrtS: "
+        call debug_writeMat( ifile, real(xxxx), norbitals, norbitals )
+        write(ifile,*) "Hk: "
+        call debug_writeMat( ifile, real(yyyy),   norbitals, norbitals )
         if (iqout .ne. 3) then
-
-! Set M=H*(S^-.5)
-         call zhemm ( 'R', 'U', norbitals, norbitals, a1, xxxx, norbitals, yyyy, norbitals, a0, zzzz, norbitals )
-
-! Set Z=(S^-.5)*M
-         call zhemm ( 'L', 'U', norbitals, norbitals, a1, xxxx, norbitals, zzzz, norbitals, a0, yyyy, norbitals )
-
+             write (*,*) " iqout .ne. 3 "
+                ! Set M=H*(S^-.5)
+                call zhemm ( 'R', 'U', norbitals, norbitals, a1, xxxx, norbitals, yyyy, norbitals, a0, zzzz, norbitals )
+                ! Set Z=(S^-.5)*M
+                call zhemm ( 'L', 'U', norbitals, norbitals, a1, xxxx, norbitals, zzzz, norbitals, a0, yyyy, norbitals )
         else
-
-! FIXME: I think these two calls we don't need them!!
-         call zgemm ('C', 'N', norbitals, norbitals, norbitals, a1, xxxx,  norbitals, ssss, norbitals, a0, zzzz, norbitals)
-
-         call zgemm ('N', 'N', norbitals, norbitals, norbitals, a1, zzzz,   norbitals, xxxx, norbitals, a0, zzzz, norbitals)
-! FIXME
-! Set conjg((W(WSW)^-1/2)T)*H
-         call zgemm ( 'C', 'N', norbitals, norbitals, norbitals, a1, xxxx,  norbitals, yyyy, norbitals, a0, zzzz, norbitals )
-! Set M*(W(WSW)^-1/2)
-         call zgemm ( 'N', 'N', norbitals, norbitals, norbitals, a1, zzzz,  norbitals, xxxx, norbitals, a0, yyyy, norbitals )
-
-! so we have conjg((W(WSW)^-1/2)T)*H*(W(WSW)^-1/2) now
-
+                ! FIXME: I think these two calls we don't need them!!
+                call zgemm ('C', 'N', norbitals, norbitals, norbitals, a1, xxxx,  norbitals, ssss, norbitals, a0, zzzz, norbitals)
+                call zgemm ('N', 'N', norbitals, norbitals, norbitals, a1, zzzz,   norbitals, xxxx, norbitals, a0, zzzz, norbitals)
+                ! FIXME
+                ! Set conjg((W(WSW)^-1/2)T)*H
+                call zgemm ( 'C', 'N', norbitals, norbitals, norbitals, a1, xxxx,  norbitals, yyyy, norbitals, a0, zzzz, norbitals )
+                ! Set M*(W(WSW)^-1/2)
+                call zgemm ( 'N', 'N', norbitals, norbitals, norbitals, a1, zzzz,  norbitals, xxxx, norbitals, a0, yyyy, norbitals )
+                ! so we have conjg((W(WSW)^-1/2)T)*H*(W(WSW)^-1/2) now
         endif
+        !call debug_writeMatFile( "SHS.log", real(yyyy), norbitals, norbitals )
+        write(ifile,*) "S^0.5*H*S^0.5: "
+        call debug_writeMat( ifile, real(yyyy),   norbitals, norbitals )
+        stop
 
 ! GAP ENRIQUE-FF
 ! Now we introduce the Hartree-Fock interaction, that is calculated in Lowdin basis
@@ -543,10 +549,6 @@
         end if
 
 ! end GAP ENRIQUE-FF
-
-
-
-
 
 ! xxxx = S^-1/2 in AO basis
 ! zzzz = Unused (used as complex workspace in cheev call below)

@@ -100,6 +100,7 @@
  
 ! Procedure
 ! ===========================================================================
+
    if(.not. allocated(Fv))then
       allocate (Fv(nmsh,max_scf_iterations))
       allocate (Xv(nmsh,max_scf_iterations))

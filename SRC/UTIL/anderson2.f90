@@ -55,8 +55,7 @@
 !
 ! Program Declaration
 ! ===========================================================================
- subroutine anderson ( x_try, x_old, beta, r2, iter, max_order, nmsh,      &
-   &                   max_scf_iterations)
+ subroutine anderson ( x_try, x_old, beta, r2, iter, max_order, nmsh,  max_scf_iterations)
 
    use charges
    implicit none
@@ -99,6 +98,10 @@
  
 ! Procedure
 ! ===========================================================================
+
+   write (*,*) "DEBUG anderson_l95.f90"
+   stop 
+
    if(.not. allocated(Fv))then
       allocate (Fv(nmsh,max_scf_iterations))
       allocate (Xv(nmsh,max_scf_iterations))
