@@ -76,8 +76,9 @@
         integer kforce
 
 ! Procedure
-
 ! ===========================================================================
+
+        write(*,*) "DEBUG assemble_mcweda() itheory", itheory
 
 !        !write (*,*) '  '
 !        !write (*,100)
@@ -263,6 +264,17 @@
            if (idipole .eq. 0) call assemble_ca_2c (nprocs, iforce, iordern)
            if (idipole .eq. 1) call assemble_ca_2c_dip (nprocs, iforce, iordern)
           endif
+
+          call debug_writeBlockedMat( "H_2c_t.log", t_mat )
+          call debug_writeBlockedMat( "H_2c_vna.log", vna )
+          call debug_writeBlockedMat( "H_2c_vxc.log", vxc )
+          !call debug_writeBlockedMat( "H_2c_vxc1c.log", vxc_1c )
+          call debug_writeBlockedMat( "H_2c_vca.log", vca )
+          call debug_writeBlockedMat( "H_2c_vxcca.log", vxc_ca )
+          call debug_writeBlockedMat( "H_2c_ewaldLR.log", ewaldlr )
+          call debug_writeBlockedMat( "H_2c_ewaldSR.log", ewaldsr )
+
+          call debug_writeBlockedMat( "H_mat_2c.log", h_mat )
 ! ===========================================================================
 !                               assemble_3c
 ! ===========================================================================
@@ -299,6 +311,17 @@
           endif
 
           !write (*,*) ' ***************************************************** '
+
+          call debug_writeBlockedMat( "H_3c_t.log", t_mat )
+          call debug_writeBlockedMat( "H_3c_vna.log", vna )
+          call debug_writeBlockedMat( "H_3c_vxc.log", vxc )
+          !call debug_writeBlockedMat( "H_2c_vxc1c.log", vxc_1c )
+          call debug_writeBlockedMat( "H_3c_vca.log", vca )
+          call debug_writeBlockedMat( "H_3c_vxcca.log", vxc_ca )
+          call debug_writeBlockedMat( "H_3c_ewaldLR.log", ewaldlr )
+          call debug_writeBlockedMat( "H_3c_ewaldSR.log", ewaldsr )
+
+          call debug_writeBlockedMat( "H_mat_3c.log", h_mat )
 
 ! ===========================================================================
 !                                 Build H
