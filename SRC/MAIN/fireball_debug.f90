@@ -30,7 +30,6 @@ program fireball
 
     call init_MPI (iammaster, iammpi, my_proc, nprocs)
 
-    write(*,*) "DEBUG 1"
     call initbasics ()
 
     do  i = 1,23
@@ -41,10 +40,8 @@ program fireball
         write (*,*)
     end do
 
-    write(*,*) "DEBUG 2"
     !call readdata ()
     call readdata_mcweda ()
-    write(*,*) "DEBUG 3"
 
     ! =========== Allocate MOs
     nkpoints = 1
@@ -60,9 +57,7 @@ program fireball
     eigen_k = 0.0d0
     bbnkim = 0.0d0
     bbnkre = 0.0d0
-    write(*,*) "DEBUG norbitals, nkpoints ", norbitals, nkpoints
 
-    write(*,*) "DEBUG 4"
     !call main_loop ()
     !call scf_loop (itime_step)
     ikpoint = 1
@@ -78,11 +73,11 @@ program fireball
         Qin(:,:) = Qin(:,:)*(1.0-bmix) + Qout(:,:)*bmix   ! linear mixer 
         !call mixCharge
     end do
-    write(*,*) "DEBUG 5"
+
     !call postscf ()               ! optionally perform post-processing (DOS etc.)
     !call getenergy (itime_step)    ! calculate the total energy
     call getenergy_mcweda () 
-    write(*,*) "DEBUG 5"
+
     write (*,*) ' FIREBALL RUNTIME : ',time_end-time_begin,'[sec]'
 
 

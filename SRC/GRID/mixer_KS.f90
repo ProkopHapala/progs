@@ -231,20 +231,16 @@
      select case (ialgmix)
      case (1)
 !        write(*,501) 'anderson'
-        call anderson (rho_in, rho_out, bmix, sigma, Kscf, idmix,    &
-             &               imix , max_scf_iterations)
+        call anderson (rho_in, rho_out, bmix, sigma, Kscf, idmix, imix , max_scf_iterations)
      case (2)
 !        write(*,501) 'broyden'
-        call broyden (rho_in, rho_out, bmix, sigma, Kscf, idmix,    &
-             &               imix , max_scf_iterations)
+        call broyden (rho_in, rho_out, bmix, sigma, Kscf, idmix, imix , max_scf_iterations)
      case (3)
 !        write(*,501) 'louie'
-        call louie (rho_in, rho_out, bmix, sigma, Kscf, idmix,    &
-             &               imix , max_scf_iterations)
+        call louie (rho_in, rho_out, bmix, sigma, Kscf, idmix, imix , max_scf_iterations)
      case (4)
 !        write(*,501) 'pulay'
-        call pulay (rho_in, rho_out, bmix, sigma, Kscf, idmix,    &
-             &               imix , max_scf_iterations)
+        call pulay (rho_in, rho_out, bmix, sigma, Kscf, idmix, imix , max_scf_iterations)
      end select !ialgmix
 
 ! end changed by honza

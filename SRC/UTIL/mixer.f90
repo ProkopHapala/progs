@@ -142,6 +142,7 @@
 ! modified by honza
 
 ! call mixing procedure
+
        select case (ialgmix)
        case (1)
 !          write(*,501) 'mixing with anderson algorithm'
@@ -156,7 +157,6 @@
 !          write(*,501) 'mixing with pulay algorithm'
           call pulay (Qoutmixer, Qinmixer, bmix, sigma, Kscf, idmix, imix , max_scf_iterations)
        end select !ialgmix
-
 
 ! end of honza
        

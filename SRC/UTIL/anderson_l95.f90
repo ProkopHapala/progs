@@ -116,7 +116,7 @@
          write(*,*) ' max_scf_iterations=',max_scf_iterations
          stop
       end if
- 
+
       X(:,iter) = x_old(:)
       F(:,iter) = x_try(:) - x_old(:)
 
@@ -211,7 +211,7 @@
 !       x_old(:)=x_old(:) + contribution(iloop)*(X(:,iloop) + beta*F(:,iloop))
 !     end do
 !     deallocate(contribution)
-      
+
       deallocate (ipiv)
       deallocate (delF_F)
       deallocate (a_matrix)

@@ -99,8 +99,9 @@
 ! Procedure
 ! ===========================================================================
 
-   write (*,*) "DEBUG anderson_l95.f90"
-   stop 
+
+   write (*,*) "DEBUG anderson2.f90", iter, max_order
+
 
    if(.not. allocated(Fv))then
       allocate (Fv(nmsh,max_scf_iterations))

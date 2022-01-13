@@ -2,8 +2,9 @@
 basisfile  = 'input.bas'
 icluster   = 1    ! PBC: 0 3D PBC; 1 cluster
 iqout      = 2
-iquench    = -6
 nstepf     = 1
+max_scf_iterations = 1
+iquench    = -6
 &END
 
 

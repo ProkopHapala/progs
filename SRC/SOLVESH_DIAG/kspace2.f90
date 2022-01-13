@@ -188,7 +188,7 @@
 !          lwork = norbitals*norbitals ! Use xxxx, yyyy and zzzz for work area
 !          lrwork = 3*norbitals
 !          allocate (rwork(lrwork))
-          lwork = 1
+          lwork = 1   !
           allocate (work(lwork))
           lrwork = 3*norbitals - 2
           allocate (rwork(lrwork))
@@ -489,14 +489,12 @@
         ifile = 111111
         write(*,*) " norbitals ", norbitals, " lwork ",lwork, " lrwork ",lrwork, " liwork ",liwork
         open( ifile, file='solveH_mats.log', status='unknown' )
-        !call debug_writeMatFile( "sqrtS.log", real(xxxx), norbitals, norbitals )
-        !call debug_writeMatFile( "Hk.log",    real(yyyy),   norbitals, norbitals )
         write(ifile,*) "sqrtS: "
         call debug_writeMat( ifile, real(xxxx), norbitals, norbitals )
         write(ifile,*) "Hk: "
         call debug_writeMat( ifile, real(yyyy),   norbitals, norbitals )
         if (iqout .ne. 3) then
-             write (*,*) " iqout .ne. 3 "
+             !write (*,*) " iqout .ne. 3 "
                 ! Set M=H*(S^-.5)
                 call zhemm ( 'R', 'U', norbitals, norbitals, a1, xxxx, norbitals, yyyy, norbitals, a0, zzzz, norbitals )
                 ! Set Z=(S^-.5)*M
@@ -512,10 +510,9 @@
                 call zgemm ( 'N', 'N', norbitals, norbitals, norbitals, a1, zzzz,  norbitals, xxxx, norbitals, a0, yyyy, norbitals )
                 ! so we have conjg((W(WSW)^-1/2)T)*H*(W(WSW)^-1/2) now
         endif
-        !call debug_writeMatFile( "SHS.log", real(yyyy), norbitals, norbitals )
         write(ifile,*) "S^0.5*H*S^0.5: "
         call debug_writeMat( ifile, real(yyyy),   norbitals, norbitals )
-        stop
+        !stop
 
 ! GAP ENRIQUE-FF
 ! Now we introduce the Hartree-Fock interaction, that is calculated in Lowdin basis
@@ -594,6 +591,13 @@
         end if
         if (info .ne. 0) call diag_error (info, 0)
 
+        !write(ifile,*) "B_low coefs (yyyy): "
+        !call debug_writeMat( ifile, real(yyyy), norbitals, norbitals )
+
+        do inu=1,norbitals
+            write(*,*) "DEBUG eig[",inu,"] ", eigen(inu)
+        end do
+
 ! FIXME - Should only go up to norbitals_new, but we do not know what
 ! eigenvalues and eigenvectors correspond to the removed MO's.  Their
 ! eigenvalues will be very close to zero, but not exactly.  Also, we do not
@@ -617,13 +621,17 @@
 
         if (iqout .ne. 3) then
          call zhemm ( 'L', 'U', norbitals, norbitals, a1, xxxx,  norbitals, yyyy, norbitals, a0, zzzz, norbitals )
-!NPA
-        else
+        else  !NPA
          call zgemm ( 'N', 'N', norbitals, norbitals, norbitals, a1, xxxx, norbitals, yyyy, norbitals, a0, zzzz, norbitals )
         end if
 
         bbnkre(:,:,ikpoint) = real(zzzz(:,:))
         if (icluster .ne. 1) bbnkim(:,:,ikpoint) = aimag(zzzz(:,:))
+
+        !write(ifile,*) "B_ao coefs: "
+        !call debug_writeMat( ifile, real(zzzz), norbitals, norbitals )
+        !close(ifile)
+        !stop
 
 
 ! We did a symmetric orthogonalization followed by a diagnalization

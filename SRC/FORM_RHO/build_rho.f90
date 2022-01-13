@@ -181,6 +181,7 @@
 ! ===========================================================================
 ! call mixer
          call mixer (natoms, itheory, ifixcharge, iwrtcharges)
+
          flag_es = 0 
 ! Check convergence of charge; sigmatol is in scf.optional
          if (sigma .lt. sigmatol) then

@@ -1,0 +1,77 @@
+  FILES:
+   basisfile         : input.bas                               
+   lvsfile           : input.lvs                               
+   kptsfile          : input.kpts                              
+   acfile            : ac.dat                        
+   xvfile            : xv.dat                        
+  ======================================================================
+ 
+  TIME STEP:
+   nstepi            :            1
+   nstepf            :            1
+   dtime             :   0.50000000000000000     
+  ======================================================================
+ 
+  OPTIONS:
+   iharris           :            0
+   idogs             :            1
+   ihubbard          :            0
+   ihorsfield        :            0
+   imcweda           :            1
+   ixczw             :            0
+   igsn              :            0
+   iks               :            0
+   iqout             :            2
+   qstate            :    0.0000000000000000     
+   icluster          :            1
+   iensemble         :            0
+   ifixcharge        :            0
+   ifixneigh         :            0
+   iumbrella         :            0
+   ibarrier          :            0
+   iconstraints      :    0   1   1   1
+   iharmonic         :            0
+   iimage            :            0
+   idynmat           :            0
+   iephc             :            0
+   ivdw              :            0
+   ineb              :            0
+   itrans            :            0
+   itdse             :            0
+   imdet             :            0
+   nddt              :         1000
+   ibias             :            0
+   rescalar          :    1.0000000000000000     
+   icDFT             :            0
+   iqmmm             :            0
+   mix_embedding     :            0
+   cut_embedding     :    999.00000000000000     
+   idipole           ;            0
+   idftd3            :            0
+   dftd3_func        : fb_bio                                  
+   dftd3_version     :            4
+   dftd3_tz          :  F
+   verbosity         :            1
+   ntpr              :            1
+   restartxyz        :            0
+   inputxyz          :            0
+   fdatalocation     : Fdata                                                                                                                                                                                                   
+   isocket           :            0
+   V_intra_dip           ;            0
+  ======================================================================
+ 
+  SCF
+   max_scf_iterations  :            1
+   ialgmix             :            1
+   bmix                :    4.0000000000000001E-002
+   tempfe              :    100.00000000000000     
+   sigmatol            :    1.0000000000000000E-008
+ 
+  TEMPERATURE
+   T_initial           :    0.0000000000000000     
+   T_final             :    10.000000000000000     
+  QUENCH:
+   energytol         :    1.0000000000000000E-004
+   forcetol          :    5.0000000000000003E-002
+   T_want            :    0.0000000000000000     
+   taurelax          :    50.000000000000000     

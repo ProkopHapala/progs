@@ -1,0 +1,192 @@
+               Welcome to FIREBALL QMD !        
+           A fast local orbital QMD Package     
+      brought to you by the Fireball Committee: 
+   
+                  James P. Lewis 
+         Department of Physics and Astronomy 
+              Brigham Young University 
+   
+                  Otto F. Sankey 
+        Department of Physics and Astronomy 
+            Arizona State University 
+   
+                   Jose Ortega 
+              Departmento de Fisica 
+        Teorica de la Materia Condensada 
+         Universidad Autonoma de Madrid 
+   
+                 Pavel Jelinek 
+              Institute of Physics 
+             Prague, Czech Republic 
+   
+   
+              with contributions from: 
+   
+  Alex A. Demkov (Motorola Physical Sciences Research Labs)
+  Gary B. Adams (Arizona State University) 
+  Jian Jun Dong (Arizona State University) 
+  David A. Drabold (Ohio University) 
+  Peter A. Fedders (Washington University) 
+  Kurt R. Glaesemann (University of Utah) 
+  Kevin Schmidt (Arizona State University) 
+  Spencer Shellman (University of Utah) 
+  John Tomfohr (Arizona State University) 
+  Hao Wang (Brigham Young University) 
+  Daniel G. Trabada (Universidad Autonoma de Madrid) 
+  Jesus I. Mendieta-Moreno (Universidad Autonoma de Madrid) 
+   
+   
+   fireball-qmd is a free (GPLv3) open project  
+   
+   
+   
+  ======================================================================
+  Now reading file fireball.in 
+   
+   
+  ======================================================================
+  The name of the basisfile: 
+   file = input.bas                     
+   
+  ======================================================================
+  The name of the lattice vector file: 
+   file = input.lvs                     
+   
+  ======================================================================
+  The name of the k-points file: 
+   file = input.kpts                    
+  iimage =            0
+   
+  The maximum number of iterations to self- 
+  consistency.
+  max_scf_iterations =            1
+  ======================================================================
+   
+  Now we are reading from the info.dat file. 
+   
+  Reading atom Coordinates from Basis File 
+   
+  You are doing a cluster calculation 
+  Lattice vectors are not needed or read in 
+   
+   
+  You are doing a cluster calculation 
+  k-points are not read in 
+   
+   
+  ======================================================================
+  You have chosen iquench =           -6
+  Optionally read information from the fireball.in file. 
+   
+   
+  ======================================================================
+  Now reading file fireball.in 
+   
+  In the event that you are searching for an energy 
+  minimum, you can also choose energy and force 
+  tolerances - energy_tol and force_tol. These tolerances 
+  will stop execution after they are achieved. Input a 
+  number for all of the following, even if option is not 
+  being used! 
+  Input energy_tol, force_tol, T_want, taurelax: 
+   
+  energy tolerance =    1.0000000000000000E-004  [eV]
+  force tolerance  =    5.0000000000000003E-002  [eV/A]
+  T_want =    0.0000000000000000       [K]
+  taurelax =    50.000000000000000     
+  ======================================================================
+   
+   
+  The Input Charges Are: 
+  ======================================================================
+   Atom #    Type    Shells   Charges 
+  ======================================================================
+       1       H       1      1.00
+       2       H       1      1.00
+       3       H       1      1.00
+       4       H       1      1.00
+  ======================================================================
+ DEBUG initbasics.f90 itheory_xc            2
+   
+   Calculated position of the Center-of-Mass:     0.000    0.400    0.000
+   
+  Constraining angular momentum!!!! 
+   
+   initial lcm =    0.0000000D+00   0.0000000D+00   0.0000000D+00
+     final lcm =    0.0000000D+00   0.0000000D+00   0.0000000D+00
+  Constraining the velocities about the center-of-mass 
+  Rescaling the velocities based on desired temperature. 
+ T_instantaneous   0.0000000000000000     
+ T_initial   0.0000000000000000     
+   
+  Atom Velocities: 
+  ======================================================================
+   Atom #    Type        x           y           z        Species # 
+  ======================================================================
+       1       H      0.00000     0.00000     0.00000        1
+       2       H     -0.00000    -0.00000     0.00000        1
+       3       H     -0.00000     0.00000    -0.00000        1
+       4       H     -0.00000    -0.00000     0.00000        1
+
+  In setgear, using gear order of            2
+
+  Initiallizing arrays 
+  ======================================================================
+  READING DATA FROM DATA FILES IN FDATA DIRECTORY: 
+  ======================================================================
+  Running setterp_2d. Set up two-dimensional interpolator. 
+  ======================================================= 
+              Begin FIRE minimization                     
+  ======================================================= 
+  No FIRE.optional => setting default parameters 
+   
+   
+  ****************************************************** 
+  Begin time step =            1  scf step =            1
+  ****************************************************** 
+   
+ DEBUG reallocate_neigh() 
+ DEBUG neighborsPP() 
+   
+   
+ DEBUG num_neigh_tot() 
+ DEBUG backnay() 
+ DEBUG neighbors_pairs() 
+ DEBUG common_neighbors() 
+ DEBUG common_neighborsPP() 
+  norbitals            4  lwork            7  lrwork           10  liwork            0
+ DEBUG eig[           1 ]   -13.393735518703206     
+ DEBUG eig[           2 ]   -5.5257472250432702     
+ DEBUG eig[           3 ]   -2.9485554558425515     
+ DEBUG eig[           4 ]    7.7329647575070108     
+ DEBUG anderson2.f90           1           6
+ =============> sigma =  0.7950239E-29 Must be less than 0.1000000E-07 SCF step =   1
+   
+  ------- THE TOTAL BAND STRUCTURE ENERGY ------- 
+   
+ EBS =           -37.838965 Time step =     1 SCF step =    1 SCF success! 
+  ----------------------------------------------- 
+  ---------- T H E  T O T A L  E N E R G Y ----------- 
+   Time step =      1 SCF step =   1
+   
+             ebs =      -37.838965
+       uii - uee =      -25.820385
+       etotxc_1c =        0.000000
+          uxcdcc =        9.507073
+            ETOT =      -54.152278
+       Etot/atom =      -13.538069
+   Atomic Energy =      -46.893880
+       CohesiveE =       -7.258398
+     Fermi Level =       -5.396223
+   
+   Cohesive Energy per atom  =       -1.814599
+  ----------------------------------------------------- 
+   
+  The grand total force (eV/A): 
+   iatom =    1 ftot      =   0.294022E+01 -0.654922E+01  0.000000E+00
+   iatom =    2 ftot      =  -0.294022E+01 -0.654922E+01  0.000000E+00
+   iatom =    3 ftot      =   0.294022E+01  0.654922E+01  0.000000E+00
+   iatom =    4 ftot      =  -0.294022E+01  0.654922E+01  0.000000E+00
+ #### FIRE: i,Fmax,|F|,v,<v|f>,dt:      1      6.54921585     14.35787163      0.00000000      0.00000000      0.13750000                                                                               
+ ++++ i, Fmax, force_tol      1      6.54921585      0.05000000
+  FIREBALL RUNTIME :    1.4881000000000002E-002 [sec]
