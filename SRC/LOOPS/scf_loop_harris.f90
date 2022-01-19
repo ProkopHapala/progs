@@ -47,7 +47,7 @@
 ! Program Declaration
 ! ===========================================================================
         subroutine scf_loop_harris (itime_step)
- 
+        use charges
         use options 
         use scf
         use energy
@@ -107,6 +107,11 @@
 ! ===========================================================================
 ! Compute the density matrices. The results rho and cape are computed.
           call build_rho (itime_step) 
+
+
+          write (*,*) "DEBUG scf_loop_harris.f90 Qin,Qout: "
+          write (*,*) "Qin ",  Qin (1,:)
+          write (*,*) "Qout ", Qout(1,:)
  
           
 ! ===========================================================================

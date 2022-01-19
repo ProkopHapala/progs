@@ -191,6 +191,7 @@
  
 ! Procedure
 ! ============================================================================
+        write(*,*) "DEBUG Dassemble_ca_3c() END"
 ! Initialize the force contributions to zero.
         f3caa = 0.0d0
         f3cab = 0.0d0
@@ -369,8 +370,11 @@
 ! Note that dsrewald is equivalent to demnpl calculated below.
            dq3 = 0.0d0
            do issh = 1, nssh(indna)
+            write (*,*) "DEBUG ialp,indna,issh, dq3 ", ialp,indna,issh, Qin(issh,ialp),Qneutral(issh,indna)
             dq3 = dq3 + (Qin(issh,ialp) - Qneutral(issh,indna))
            end do
+
+           !write (*,*) "DEBUG ialp,indna, dq3 ", ialp,indna,dq3
  
 ! Second, calculate the long-range effective monopole.  This term is included
 ! so that we obtain no discontinuities when atoms leave or enter the 2*rc
@@ -539,6 +543,7 @@
 ! accomplished by just adding in demnpl*rho again.
            do inu = 1, num_orb(in2)
             do imu = 1, num_orb(in1)
+             !write (*,*) "DEBUG ia,inegh,imu,inu,rho,eq2,demnplA ",   ialp,ineigh,imu,inu, rho(imu,inu,mneigh,iatom),eq2,demnplA(:,imu,inu)   
              do ix = 1, 3
               f3caa(ix,ialp) = f3caa(ix,ialp)                                &
      &         + 2*rho(imu,inu,mneigh,iatom)*demnplA(ix,imu,inu)*eq2
@@ -556,7 +561,7 @@
           end if
          end do
         end do
- 
+        write(*,*) "DEBUG Dassemble_ca_3c() END"
 ! Format Statements
 ! ===========================================================================
  
