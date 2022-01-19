@@ -109,7 +109,8 @@
 !                  check input and output charges for scf
 ! ===========================================================================
 ! call mixer
-         call mixer (natoms, itheory, ifixcharge, iwrtcharges)
+     call mixer (natoms, itheory, ifixcharge, iwrtcharges)
+         
 
 ! Check convergence of charge; sigmatol is in scf.optional
          if (sigma .lt. sigmatol) scf_achieved = .true.

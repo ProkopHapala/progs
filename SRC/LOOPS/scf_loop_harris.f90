@@ -108,12 +108,6 @@
 ! Compute the density matrices. The results rho and cape are computed.
           call build_rho (itime_step) 
 
-
-          write (*,*) "DEBUG scf_loop_harris.f90 Qin,Qout: "
-          write (*,*) "Qin ",  Qin (1,:)
-          write (*,*) "Qout ", Qout(1,:)
- 
-          
 ! ===========================================================================
 ! At this point we are only calculating the total band-structure energy
 ! All the rest of the stuff that was written out here is moved down below
