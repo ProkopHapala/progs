@@ -201,6 +201,10 @@
      &             + rho(imu,inu,ineigh,iatom)*tp_mat(ix,imu,inu,ineigh,iatom)
              sumS = sumS                                                     &
      &             + cape(imu,inu,ineigh,iatom)*sp_mat(ix,imu,inu,ineigh,iatom)
+     if( ix .eq. 1 )then
+     !   write(*,*) "i,j,inu,imu,tp,sp ", iatom,jatom,inu,imu,  tp_mat(:,imu,inu,ineigh,iatom), sp_mat(:,imu,inu,ineigh,iatom)
+     write(*,*) "i,j,inu,imu,cape,sp_mat ", iatom,jatom,inu,imu,  cape(imu,inu,ineigh,iatom), sp_mat(:,imu,inu,ineigh,iatom)
+     end if
             end do
            end do
  
@@ -219,6 +223,9 @@
 !!$omp end critical
           end do ! do ix
  
+          !write(*,*) "i,j,fro,ft ", iatom,jatom, fro(:,iatom), ft(:,iatom)
+          !write(*,*) "i,j,sumT,sumS ", iatom,jatom, sumT, sumS
+
 ! Gaussian approximation to three-center exchange-correlation interactions.
           if (igauss .eq. 1) then
            do ix = 1, 3
