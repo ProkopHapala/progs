@@ -60,7 +60,7 @@
         use forces
         use interactions
         use neighbor_map
-        use options, only: idipole, itheory_xc
+        use options, only: idipole, itheory_xc, idogs
 
         use debug
         implicit none
@@ -130,7 +130,7 @@
 ! Procedure
 ! ===========================================================================
 
-        write(*,*) "DEBUG assemble_2c.f90",  iforce
+        !write(*,*) "DEBUG assemble_2c.f90",  iforce
 ! Initialize interactions
         vna = 0.0d0
 
@@ -140,10 +140,12 @@
         t_mat = 0.0d0
         sp_mat = 0.0d0
         tp_mat = 0.0d0
-        dipcm = 0.0d0
-        dipc = 0.0d0
-        dippcm = 0.0d0
-        dippc = 0.0d0
+        if (idogs .ne. 0) then
+                dipcm = 0.0d0
+                dipc = 0.0d0
+                dippcm = 0.0d0
+                dippc = 0.0d0
+        end if 
 
 ! Determine which atoms are assigned to this processor.
         if (iordern .eq. 1) then
@@ -228,11 +230,10 @@
            do imu = 1, num_orb(in1)
             s_mat(imu,inu,ineigh,iatom) = sx(imu,inu)
             t_mat(imu,inu,ineigh,iatom) = tx(imu,inu)
-
             if (iforce .eq. 1) then
              sp_mat(:,imu,inu,ineigh,iatom) = spx(:,imu,inu)
              tp_mat(:,imu,inu,ineigh,iatom) = tpx(:,imu,inu)
-             write(*,*) "i,j,inu,imu,spx,tpx ", iatom,jatom,inu,imu,  spx(:,imu,inu), tpx(:,imu,inu)
+             !write(*,*) "i,j,inu,imu,spx,tpx ", iatom,jatom,inu,imu,  spx(:,imu,inu), tpx(:,imu,inu)
             end if
            end do
           end do

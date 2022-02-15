@@ -260,18 +260,10 @@
     open (unit = 1028, file = 'ksamples.dat', status = 'unknown')
   end if
 
-
-
-
   if (PlotImag .eq. 1) then
      allocate ( ewfIm(0:nrm-1))
      allocate ( ewfRe(0:nrm-1))
   end if 
-
-   Write (*,*) "DEBUG:"
-   write (*,'(A,3f16.8)') "a1vec", a1vec
-   write (*,'(A,3f16.8)') "a2vec", a2vec
-   write (*,'(A,3f16.8)') "a3vec", a3vec
 
  if (GetMaxPos .gt. 0) then
     open (unit = 33, file = 'kmaxs.dat', status = 'unknown')

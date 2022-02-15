@@ -107,7 +107,7 @@ write (*,*) " YOU ARE IN ew2mesh_ARPES "
     read (30,*) Emin, Emax
     read (30,*) alat                           ! read lattice constant
     read (30,*) nkps                   ! read 
-    write (*,*) "DEBUG: ", nkps, alat
+
     allocate(kline(3,nkps))
 
     read (30,*) kline(:,1), kline(:,nkps)   

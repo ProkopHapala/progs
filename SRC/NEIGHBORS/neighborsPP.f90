@@ -122,7 +122,7 @@
 
         logical flag
 
-	write (*,*) "DEBUG neighborsPP() "
+	!write (*,*) "DEBUG neighborsPP() "
 
 ! Procedure
 ! ===========================================================================

@@ -87,8 +87,8 @@
 ! Procedure
 ! ===========================================================================
 
-   write (*,*) "DEBUG mixer <<Qin  ", Qin (1,:)
-   write (*,*) "DEBUG mixer <<Qout ", Qout(1,:)
+  !write (*,*) "DEBUG mixer <<Qin  ", Qin (1,:)
+  !write (*,*) "DEBUG mixer <<Qout ", Qout(1,:)
 
 ! Check to see if input charges and output charges are within tolerance.
 ! If they are within tolerance, then perform a motional time step. If
@@ -161,14 +161,8 @@
           call pulay (Qoutmixer, Qinmixer, bmix, sigma, Kscf, idmix, imix , max_scf_iterations)
        end select !ialgmix
 
-       !write(*,*) "DEBUG Qoutmixer ", Qoutmixer(:)
-       !write(*,*) "DEBUG Qinmixer  ", Qinmixer (:)
-
 ! end of honza
 
-       !write(*,*) "DEBUG mixer  Kscf, sigma, sigmaold ", Kscf, sigma, sigmaold
-       
-       
        if (Kscf .gt. 1) then
          if (sigma .lt. sigmaold) then
            sigmaold = sigma
@@ -176,8 +170,6 @@
        else
          sigmaold = sigma
        end if
-
-       !write(*,*) "DEBUG mixer  scf_achieved ", scf_achieved, Kscf, sigma, sigmaold
 
 ! Check convergence of charge; sigmatol is in scf.optional
 !       write (*,*) '  '
@@ -226,8 +218,8 @@
 !    write (*,*) '  '
     if (verbosity .ge. 1) write (*,303) sigma, sigmatol, Kscf
 
-    write (*,*) "DEBUG mixer >>Qin  ", Qin (1,:)
-    write (*,*) "DEBUG mixer >>Qout ", Qout(1,:)
+    !write (*,*) "DEBUG mixer >>Qin  ", Qin (1,:)
+    !write (*,*) "DEBUG mixer >>Qout ", Qout(1,:)
 
 ! Format Statements
 ! ===========================================================================

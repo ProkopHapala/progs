@@ -90,7 +90,7 @@
         integer neigh_max_vdw_old
         integer neighPP_max_old
 
-        write (*,*) "DEBUG reallocate_neigh() "
+        !write (*,*) "DEBUG reallocate_neigh() "
         
 ! Procedure
 ! ===========================================================================

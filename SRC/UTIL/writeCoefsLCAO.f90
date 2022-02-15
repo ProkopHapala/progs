@@ -98,7 +98,6 @@ do ikpoint = 1,nkpoints
 					else
 					    Ci2 (j) = cmplx( bbnkre(mmu,iband,ikpoint), bbnkim(mmu,iband,ikpoint) ) 
 					end if
-				!write (*,'(A,5i5,2f10.5)') " DEBUG : ", iatom, issh, l, lmu, j, real(Ci(j)), aimag(Ci(j))
 				end do ! lmu
 			    l1 = max(l,l1)
 			    !l1 = l
@@ -223,7 +222,6 @@ nichts = 0.0
 					else
 					    Ci2 (j) = bbnkre(mmu,iband,ikpoint)
 					end if
-				!write (*,'(A,5i5,2f10.5)') " DEBUG : ", iatom, issh, l, lmu, j, real(Ci(j)), aimag(Ci(j))
 				end do ! lmu
 			    l1 = max(l,l1)
 			    !l1 = l

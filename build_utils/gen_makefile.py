@@ -322,12 +322,10 @@ if __name__ == "__main__":
     #FFLAGS, LFLAGS_, LPATHS = genFlags( ["OPT"], MKL_PATH=MKL_PATH, MPI_PATH=MPI_PATH )
     LFLAGS_, LPATHS   = genLFLAGS( MKL_PATH=MKL_PATH, MPI_PATH=MPI_PATH )
     _FFLAGS = Makefile_machines._FFLAGS
+    
     #mode_opt = 'OPT'
     mode_opt = 'DEBUG'
-
-    #FFLAGS = _FFLAGS[mode_opt] + _FFLAGS['F90']
-    #FFLAGS = _FFLAGS[mode_opt] + _FFLAGS['F90']
-    #FFLAGS = _FFLAGS[mode_opt] + _FFLAGS['F90']
+    if len(sys.argv)>1: mode_opt=sys.argv[1]
 
     INCLUDES = "-I/usr/include/mpich/"
 

@@ -66,6 +66,7 @@
         use barrier
         use nonadiabatic
         use integrals, only : fdataLocation
+        use interactions, only: wrtout
         use fb_sockets, only : socket, inet, port, host
         implicit none
 
@@ -281,6 +282,11 @@
 
 ! checkout the data consistency
         call checksum_options ()
+
+
+        if( verbosity .lt. 1 ) then
+                wrtout = .false.
+        end if
 
 ! SECTION OPTIONS
         write (*,*) ' The name of the basisfile: '

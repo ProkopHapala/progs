@@ -79,7 +79,7 @@
 
 ! Local Variable Declaration and Description
 ! ===========================================================================
-        integer ifile
+        !integer ifile
 
         integer iatom
         integer ineigh
@@ -116,9 +116,8 @@
 ! ===========================================================================
 !        write (*,*) ' Welcome to assemble_F - ftot assembled here. '
 
-        ifile =111
-        open(ifile, file="assemble_F.log", status="REPLACE")
-
+        !ifile =111
+        !open(ifile, file="assemble_F.log", status="REPLACE")
         !call debug_writeAtomCartes( ifile, "f3caa" , f3caa,  natoms )
         !call debug_writeAtomCartes( ifile, "f3cab" , f3cab,  natoms )
         !call debug_writeAtomCartes( ifile, "f3cac" , f3cac,  natoms )
@@ -469,16 +468,13 @@
          write (*,*) '  '
         end if
 
-
-
-        call debug_writeAtomCartes( ifile, "ft" , ft,  natoms )
+        !call debug_writeAtomCartes( ifile, "ft" , ft,  natoms )
         !call debug_writeAtomCartes( ifile, "fna", fna, natoms )
-        call debug_writeAtomCartes( ifile, "fnl", fnl, natoms )
+        !call debug_writeAtomCartes( ifile, "fnl", fnl, natoms )
         !call debug_writeAtomCartes( ifile, "fxc", fxc,  natoms )
-
-        call debug_writeAtomCartes( ifile, "fca"   , fca,    natoms )
-        call debug_writeAtomCartes( ifile, "fxc_ca", fxc_ca, natoms )
-        call debug_writeAtomCartes( ifile, "flrew", flrew,   natoms )
+        !call debug_writeAtomCartes( ifile, "fca"   , fca,    natoms )
+        !call debug_writeAtomCartes( ifile, "fxc_ca", fxc_ca, natoms )
+        !call debug_writeAtomCartes( ifile, "flrew", flrew,   natoms )
 
 
 ! ****************************************************************************
@@ -553,11 +549,11 @@
         end if
 
 
-        call debug_writeAtomCartes( ifile, "fbs" , fbs,  natoms )
-        call debug_writeAtomCartes( ifile, "dusr", dusr, natoms )
-        call debug_writeAtomCartes( ifile, "dxcv", dxcv, natoms )
-        call debug_writeAtomCartes( ifile, "fro" , fro,  natoms )
-        close(ifile)
+        !call debug_writeAtomCartes( ifile, "fbs" , fbs,  natoms )
+        !call debug_writeAtomCartes( ifile, "dusr", dusr, natoms )
+        !call debug_writeAtomCartes( ifile, "dxcv", dxcv, natoms )
+        !call debug_writeAtomCartes( ifile, "fro" , fro,  natoms )
+        !close(ifile)
 
 ! ****************************************************************************
 ! Now the total force: ftot

@@ -1,0 +1,19 @@
+&OPTION
+basisfile  = 'input.bas'
+icluster   = 1    ! PBC: 0 3D PBC; 1 cluster
+iqout      = 2
+iquench    = -6
+
+max_scf_iterations = 100
+nstepf     = 100
+verbosity = 0
+&END
+
+&QUENCH
+forcetol = 0.0001
+&END
+
+&OUTPUT
+iwrtxyz    = 1
+&END
+

@@ -88,8 +88,6 @@ do iband = 1, norbitals
 	end do
 end do
 
-write (*,*)   " DEBUG: norbin   ",norbin
-
 iorbin = 0
 allocate (  EmapTot        ( nE, nkpoints          ) )
 EmapTot = 0.0

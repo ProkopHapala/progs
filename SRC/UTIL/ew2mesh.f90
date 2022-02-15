@@ -262,7 +262,6 @@
  
    ewfaux = 0.0d0
    do ii = 1, nbandsin
-!write (*,*) " DEBUG : 2 ii ", ii,iband,ikpoint
     iband   = pbandsin   (ii)
     ikpoint = pkpointsin (ii)
 

@@ -69,7 +69,7 @@ subroutine main_loop_FIRE ()
 	use energy
 	use optimization
 	use scf
-
+	!use options, only: verbosity 
 	implicit none
 
 ! Argument Declaration and Description
@@ -119,14 +119,16 @@ subroutine main_loop_FIRE ()
 !       call writeAnswerBas ( ratom, natoms )
        call write_bas(  )
 ! convergence criteria
-	write (*,'(A,i6,2f16.8)') ' ++++ i, Fmax, force_tol ', itime_step, deltaFmax, force_tol
+
+	if (verbosity .gt. 0) write (*,'(A,i6,2f16.8)') ' ++++ i, Fmax, force_tol ', itime_step, deltaFmax, force_tol
 !	if ( FIRE_Ftot .lt. force_tol ) then
 	if ( deltaFmax .lt. force_tol ) then
 	  write (*,*) ' +++++ FIRE.optionalimization converged +++++ '
 	  write (*,*) 'That`sall for now, bye ..'
-	  stop
+	  return
+	  !stop
 	endif
-      end do ! itime_step
+    end do ! itime_step
 
       return
 end subroutine main_loop_FIRE
@@ -185,6 +187,7 @@ end subroutine init_FIRE
 
 subroutine move_ions_FIRE( istep )
 	use outputs, only: iwrtxyz
+	use options, only: verbosity
 	use optimization
 	use configuration
 	use forces
@@ -253,7 +256,7 @@ subroutine move_ions_FIRE( istep )
 		enddo
 	enddo
 
-	write ( xyz_headline, '(A, i6, 5f16.8)' ) " #### FIRE: i,Fmax,|F|,v,<v|f>,dt: ", istep, deltaFmax, FIRE_Ftot, sqrt(vv), vf, FIRE_dt  
+	if (verbosity .gt. -1) write ( xyz_headline, '(A, i6, 5f16.8)' ) " #### FIRE: i,Fmax,|F|,v,<v|f>,dt: ", istep, deltaFmax, FIRE_Ftot, sqrt(vv), vf, FIRE_dt  
 	write ( *, '(A)' )  xyz_headline
 	if ( iwrtxyz .eq. 1 ) call write_to_xyz( xyz_headline, istep )
 

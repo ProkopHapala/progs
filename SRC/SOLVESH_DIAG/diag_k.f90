@@ -90,7 +90,7 @@
 ! ===========================================================================
 
         !call debug_writeBlockedMat( "S_mat.log", s_mat )
-        call debug_writeBlockedMat( "H_mat.log", h_mat )
+        !call debug_writeBlockedMat( "H_mat.log", h_mat )
         !write (*,*) "DEBUG STOP in diag_k()"
         !stop  ! DEBUG
 

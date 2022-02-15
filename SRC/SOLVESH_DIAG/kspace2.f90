@@ -113,7 +113,7 @@
         integer lm
         integer issh
 
-        integer ifile
+        !integer ifile
 
         real dot
         real*8 sqlami
@@ -486,13 +486,13 @@
 
 ! CALCULATE (S^-1/2)*H*(S^-1/2)
 ! ****************************************************************************
-        ifile = 111111
-        write(*,*) " norbitals ", norbitals, " lwork ",lwork, " lrwork ",lrwork, " liwork ",liwork
-        open( ifile, file='solveH_mats.log', status='unknown' )
-        write(ifile,*) "sqrtS: "
-        call debug_writeMat( ifile, real(xxxx), norbitals, norbitals )
-        write(ifile,*) "Hk: "
-        call debug_writeMat( ifile, real(yyyy),   norbitals, norbitals )
+        !ifile = 111111
+        !write(*,*) " norbitals ", norbitals, " lwork ",lwork, " lrwork ",lrwork, " liwork ",liwork
+        !open( ifile, file='solveH_mats.log', status='unknown' )
+        !write(ifile,*) "sqrtS: "
+        !call debug_writeMat( ifile, real(xxxx), norbitals, norbitals )
+        !write(ifile,*) "Hk: "
+        !call debug_writeMat( ifile, real(yyyy),   norbitals, norbitals )
         if (iqout .ne. 3) then
              !write (*,*) " iqout .ne. 3 "
                 ! Set M=H*(S^-.5)
@@ -510,8 +510,8 @@
                 call zgemm ( 'N', 'N', norbitals, norbitals, norbitals, a1, zzzz,  norbitals, xxxx, norbitals, a0, yyyy, norbitals )
                 ! so we have conjg((W(WSW)^-1/2)T)*H*(W(WSW)^-1/2) now
         endif
-        write(ifile,*) "S^0.5*H*S^0.5: "
-        call debug_writeMat( ifile, real(yyyy),   norbitals, norbitals )
+        !write(ifile,*) "S^0.5*H*S^0.5: "
+        !call debug_writeMat( ifile, real(yyyy),   norbitals, norbitals )
         !stop
 
 ! GAP ENRIQUE-FF
@@ -594,9 +594,9 @@
         !write(ifile,*) "B_low coefs (yyyy): "
         !call debug_writeMat( ifile, real(yyyy), norbitals, norbitals )
 
-        do inu=1,norbitals
-            write(*,*) "DEBUG eig[",inu,"] ", eigen(inu)
-        end do
+        !do inu=1,norbitals
+        !    write(*,*) "DEBUG eig[",inu,"] ", eigen(inu)
+        !end do
 
 ! FIXME - Should only go up to norbitals_new, but we do not know what
 ! eigenvalues and eigenvectors correspond to the removed MO's.  Their

@@ -99,10 +99,6 @@
 ! Procedure
 ! ===========================================================================
 
-
-   write (*,*) "DEBUG anderson2.f90", iter, max_order
-
-
    if(.not. allocated(Fv))then
       allocate (Fv(nmsh,max_scf_iterations))
       allocate (Xv(nmsh,max_scf_iterations))
@@ -127,11 +123,9 @@
 ! What order interpolation do we use this time
    mix_order = min(iter,max_order)
 
-   write (*,*) "DEBUG anderson2.f90 0:3 ", beta
 ! Only doing simple extrapolation, or converged
    if(mix_order .eq. 1 .or. r2 .lt. tr2) then
       x_old(:) = x_old(:) + beta*Fv(:,iter)
-      write (*,*) "DEBUG anderson2.f90 x_old ", x_old(:)
       return
    end if
 
@@ -186,8 +180,6 @@
       deallocate (work,ipiv,delF_F,a_matrix)
       goto 888 ! Try again with lower order
    end if
-
-   write(*,*) "DEBUG anderson2.f90: beta, delF_F(:) ", beta, delF_F(:)
 
 ! Generate new guess at charges Eq. 7.7  (delF_F is now gamma)
    x_old(:) = x_old(:) + beta*Fv(:,iter)  ! First-order term

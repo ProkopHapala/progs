@@ -1,6 +1,6 @@
 #!/bin/bash
 
-fireball="../../build/fireball.x"
+fireball="../../build_DEBUG/fireball.x"
 
 #PATH=$PATH:/home/prokop/SW/intel/mkl/lib/intel64
 #LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/prokop/SW/intel/mkl/lib/intel64
